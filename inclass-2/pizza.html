@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<body>
+
+<h1>Rice Pizza Ordering Form</h1>
+
+<img src="https://staff.rice.edu/images/staff/branding/logo.jpg" width="200px" title="Rice Logo">
+
+<form>
+    <p>Name: <input type="text" name="name" required></p>
+    <p>Address(#### Street Name): <input type="text" name="address" pattern="^\d{1,5}\w\s\w*" required></p>
+    <p>Phone Number(xxx-xxx-xxxx): <input type="tel" name="phone" pattern="^\d{3}-\d{3}-\d{4}$" required></p>
+    <p>Pizza Size: 
+        <input type="radio" name="size" value="Large" required> Large
+        <input type="radio" name="size" value="Medium"> Medium
+        <input type="radio" name="size" value="Small"> Small  
+    </p>
+    <p>Pizza Toppings 
+        <input type="checkbox" name="topping" value="Sausage"> Sausage
+        <input type="checkbox" name="topping" value="Pepperoni"> Pepperoni
+        <input type="checkbox" name="topping" value="Olives"> Olives  
+        <input type="checkbox" name="topping" value="Onions"> Onions  
+    </p>
+    <p>
+        <input type="submit" value="Place Order">
+        <input type="reset" value="Clear">
+    </p>
+</form>
+</body>
+</html>
