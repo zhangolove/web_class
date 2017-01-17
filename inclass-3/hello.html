@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<body onload="timeout();countdown()">
+
+<h1>My Name: Chongzhang Li</h1>
+
+<img src="https://staff.rice.edu/images/staff/branding/logo.jpg" width="200px" title="Rice Logo">
+
+
+
+<p>Some text: my last trip is a nightmare.</p>
+
+<p>My favorite place: <a href="https://www.rice.edu">Rice University</a></p>
+<p>My SNS: <a href="https://twitter.com/zhangolove">My twitter</a></p>
+
+<form>
+    <textarea id="text_area"></textarea>
+    <p>
+        <input type="submit">
+        <button type="button" onclick="clearText()">Clear</button>
+        <button type="button" onclick="pause()">Pause Countdown</button>
+        <button type="button" onclick="resume()">Resume Countdown</button>
+    </p>
+    
+</form>
+
+<span id="indicator"></span>
+</body>
+
+<script>
+var ifPause = false
+function clearText() {
+    document.getElementById("text_area").value = ''
+}
+
+function timeout() {
+    setTimeout(function() { alert("the page will redirect when the counter reaches zero"); }, 5000);
+}
+
+function countdown() {
+    var indicator = document.getElementById("indicator")
+    var remaining_time = 15
+    indicator.innerHTML = remaining_time--
+    setInterval(function(){ 
+        if (ifPause) {
+            return
+        }
+        indicator.innerHTML = remaining_time-- 
+        if (remaining_time == 0) {
+            indicator.innerHTML = ""
+            window.location = "https://www.clear.rice.edu/comp431/sample/hello.html"
+        }
+    }, 1000);
+}
+
+function pause() {
+    ifPause = true
+}
+
+function resume() {
+    ifPause = false
+}
+
+</script>
+</html>
