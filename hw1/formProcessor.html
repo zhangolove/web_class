@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chongzhang Li">
+</head>
+<body onload="display_table()">
+
+<h1>Form Processor Page</h1>
+
+<table id="form_table">
+    <tr>
+        <td>key</td>
+        <td>value</td>
+    </tr>
+</table>
+
+</body>
+
+<script>
+
+function display_table(part) {
+    location.search.substr(1).split("&").forEach(fill_table)
+}
+
+function fill_table(part) {
+    table = document.getElementById("form_table")
+    var item = part.split("=")
+    if (item[0] === "timestamp") {
+        item[1] = new Date(Number(item[1])).toString()
+    }
+    var row = table.insertRow(-1);
+    for (i in [0, 1]) {
+        var cell = row.insertCell(i)
+        cell.innerHTML = decodeURIComponent(item[i])
+    }
+}
+
+
+</script>
+</html>
