@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Profile Page</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Chongzhang Li">
+    <script type="text/javascript" src="profile.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>My Profile</h1>
+
+<a href="main.html"class="nav">Home</a>
+
+<div>
+    <label> Display name </label>
+    <input type="text" pattern="^[A-Za-z][A-Za-z0-9]*" name="name" id="name">
+    <label>Chongzhang</label>
+</div>
+<div>
+    <label> Email address </label>
+    <input type="email" name="email" id="email" placeholder="a@b.co" 
+        pattern="^[A-Za-z0-9]+@[A-Za-z0-9.]+\.[a-zA-Z]+$">
+    <label>cl46@rice.edu</label>
+</div>
+<div>
+    <label> Phone number </label>
+    <input type="tel" name="phone" placeholder="1234567890" id="phone" pattern="^\d{10}$" >
+    <label>1234567890</label>
+</div>
+<div>
+    <label> Zipcode </label>
+    <input type="text" name="zipcode" placeholder="77005" id="zipcode" pattern="^\d{5}$" >
+    <label>77005</label>
+</div>
+<div>
+    <label> Password </label>
+    <input type="password" name="pwd0" id="pwd0" >
+    <label>abc</label>
+</div>
+<div>
+    <label> Password confirmation </label>
+    <input type="password" name="pwd1" id="pwd1" >
+    <label>abc</label>
+</div>
+<div>
+    <button id="update_btn"> Update </button>
+    <div id="error_msg"></span>
+</div>
+
+
+</body> 
+</html> 

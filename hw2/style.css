@@ -1,0 +1,67 @@
+body{
+	/* top right bottom left */
+	padding: 1em 0.5em 1em 0.5em;
+    margin: 1em 20%;
+}
+
+img {
+    float:left;
+    margin: 20px 15px;
+    width: auto;
+    height: auto;
+}
+
+td {
+    border:2px gray solid;
+    border-radius: 2%;
+    position: relative;
+    vertical-align: top;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td button {
+    position:absolute;
+    top: 20px;
+    left: 25px;
+    
+    
+}
+
+button {
+    padding: 5px 25px;
+    border: none;
+}
+
+table {
+    margin-top:4em;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.nav {
+    text-decoration: none;
+    background-color: dodgerblue;
+    text-align: center;
+    color: white;
+    display: block;
+    padding: 15px;
+    margin-bottom: 50px;
+  
+}
+
+div label:first-child { 
+    font-size: 1.2em;
+}
+
+#update_btn {
+    margin-top: 30px;
+}
+
+#error_label {
+    color: red;
+}
+
+#update_label {
+    color: green;
+}
