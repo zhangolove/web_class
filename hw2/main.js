@@ -3,13 +3,16 @@ window.onload = function() {
     
     const numImagePerSet = 5
     const images = document.getElementsByTagName('img')
-    const imgUrls = Array.prototype.map.call(images, function(img, idx) {
-        //this is to generate a list of 5 image urls for each img element
+    const imgList = Array.prototype.map.call(images, function(img, idx) {
+        //this is to generate a list of 5 images for each img element
         const imageBaseUrl = "https://unsplash.it/300/300?image=" + idx
         return [1, 2, 3, 4, 5].map(function(i) {
-            return imageBaseUrl + i
+            const img = new Image()
+            img.src = imageBaseUrl + i
+            return img
         })
     })
+
 
     function createButton(img){
         const button = document.createElement("BUTTON")
@@ -27,7 +30,7 @@ window.onload = function() {
         let nthInSet = 0
         const updateImgFunc = function() {
             return setInterval(function() {			
-                        img.src = imgUrls[idx][nthInSet]
+                        img.src = imgList[idx][nthInSet].src
                         nthInSet = (nthInSet + 1) % 5	
                     }, imageUpdateRate)
         }
