@@ -11,6 +11,9 @@ const particle = ({
     return {acceleration, velocity, position, mass}
 }
 
+const add = ([v1x, v1y], [v2x, v2y]) => [v1x + v2x, v1y + v2y]
+const scale = ([vx, vy], a) => [vx * a, vy * a] 
+
 const update = ({acceleration, velocity, position, mass}, delta, canvas) => {
 	// IMPLEMENT ME
     canvas = canvas ? canvas : {width: 800, height: 800}
