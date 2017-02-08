@@ -1,3 +1,4 @@
+//this is from inclass-8/particle.js
 const frameUpdate = (cb) => {
     const rAF = (time) => {
         requestAnimationFrame(rAF)
@@ -34,8 +35,6 @@ const GameVars = (c, w, h) => {
     GameVars.resumeBox = {position: [w/2 - ww/2, h/2], size: [ww, hh]}
     GameVars.speedBox = {position: [w/2 - ww * 0.8/2, h/2 + 95], 
                         size: [ ww * 0.8, hh * 0.8]}
-
-    
 }
 
 const random = (min=0, max=800, signed=false) => {
@@ -60,9 +59,6 @@ const speedControl = () => {
     return [random(2 * rate, 3 * rate, true), 
         random(-3 * rate, -2 * rate)]
 }
-
-
-
 
 const bounce = (ball, surfaceNorm) => {
     const v = add(ball.velocity, 
@@ -99,7 +95,6 @@ const displayText = (context, text, x, y, font, color) => {
     context.fillStyle = color
     context.textAlign="center"
     context.fillText(text, x, y)
-
 }
 
 const textInBox = (context, x, y, ww, hh, text, color="#000000") => {
@@ -114,8 +109,19 @@ const textInBox = (context, x, y, ww, hh, text, color="#000000") => {
 }
 
 const drawGameOverlay = (context, w, h, score, status) => {
-    
-    if (status === StatusEnum.start) {
+
+
+    switch (status) {
+    case StatusEnum.prestart:
+        drawOverlay(context, w, h, () => {
+                context.font = '40pt Calibri'
+                context.lineWidth = 4
+                context.strokeStyle = 'white'
+                context.textAlign="center"
+                context.strokeText('Click to start', w / 2, h/2)
+        })
+        break
+    case StatusEnum.start:
         const {position, size} = GameVars.settings
         context.font = '40pt Calibri'
         context.lineWidth = 4
@@ -126,7 +132,8 @@ const drawGameOverlay = (context, w, h, score, status) => {
         const x = position[0], y = position[1]
         const ww = size[0], hh = size[1]
         textInBox(context, x, y, ww, hh, "Settings")
-    }else if (status === StatusEnum.pause) {
+        break
+    case StatusEnum.pause:
         drawOverlay(context, w, h, () => {
             let {position, size} = GameVars.resumeBox
             textInBox(context, position[0], position[1], 
@@ -138,13 +145,16 @@ const drawGameOverlay = (context, w, h, score, status) => {
             textInBox(context, position[0], position[1], 
                     size[0], size[1], "Medium", "white")
         })
-    }else if (status == StatusEnum.prestart) {
+        break
+    case StatusEnum.over:
         drawOverlay(context, w, h, () => {
-                context.font = '40pt Calibri'
-                context.lineWidth = 4
-                context.strokeStyle = 'white'
-                context.textAlign="center"
-                context.strokeText('Click to start', w / 2, h/2)
+            const {position, size} = GameVars.resumeBox
+            textInBox(context, position[0], position[1], 
+                    size[0], size[1], "Start Again", "white")
+            displayText(context, `Score: ${score}`, w / 2, h/2 + 75, 
+                                        '15pt Calibri', "white")
+            displayText(context, `Highest Score: ${score}`, w / 2, h/2 + 120, 
+                                        '15pt Calibri', "white")
         })
     }
     
@@ -188,11 +198,6 @@ const newPaddle = ({
 }
 
 
-
-
-
-
-
 window.onload = () => {
     const canvas = document.getElementById('app')
     canvas.width = Math.min(window.innerHeight * 2/3, window.innerWidth);
@@ -216,20 +221,32 @@ window.onload = () => {
     }, false)
 
     canvas.addEventListener('click', (e) => {
-      if (status === StatusEnum.prestart) {
-        initGame()
-      }else if (status === StatusEnum.start 
-                && pointInRect(getMousePos(canvas, e), 
-                            GameVars.settings)) {
-        status = StatusEnum.pause
-      } else if (status === StatusEnum.pause) {
-        const mouse = getMousePos(canvas, e)
-        if (pointInRect(mouse, GameVars.resumeBox)) {
-            status = StatusEnum.start
-        } else if (pointInRect(mouse, GameVars.speedBox)) {
 
+        const mouse = getMousePos(canvas, e)
+        switch (status) {
+        case StatusEnum.prestart:
+            initGame()
+            break
+        case StatusEnum.start:
+            status = pointInRect(mouse, GameVars.settings) ? 
+                            StatusEnum.pause : status
+            break
+        case StatusEnum.pause:
+            status = pointInRect(mouse, GameVars.resumeBox) ?
+                            StatusEnum.start : status
+            if (pointInRect(mouse, GameVars.speedBox)) {
+                speedControl()
+            }
+            break
+        case StatusEnum.over:
+            if (pointInRect(mouse, GameVars.resumeBox)) {
+                initGame()
+            }
+            break;
+        default:
+            alert("debug: wrong status code")
         }
-      }
+     
       
     }, false)
 
@@ -248,52 +265,50 @@ window.onload = () => {
     let score = 0
 
     const initGame = () => {
-    bricks = Array(GameVars.numBricksRows).fill(0).reduce((pre, row, i) => {
-            return pre.concat(Array(GameVars.numBricksCols).fill(0)
-                    .map((col, j) => {
-                return newBrick({position: 
-                    [j * (GameVars.brickWidth + 
-                    GameVars.brickLeftOffset) + GameVars.brickLeftOffset, 
-                    i * (GameVars.brickHeight + GameVars.brickTopOffset) 
-                                            + GameVars.brickTopOffset]})
-                }))
-        }, [])
-        paddle = newPaddle()
-        status = StatusEnum.start
-        balls = balls.map((b) => newBall({position: b.position}))
-        score = 0
+        bricks = Array(GameVars.numBricksRows).fill(0).reduce((pre, row, i) => {
+                return pre.concat(Array(GameVars.numBricksCols).fill(0)
+                        .map((col, j) => {
+                    return newBrick({position: 
+                        [j * (GameVars.brickWidth + 
+                        GameVars.brickLeftOffset) + GameVars.brickLeftOffset, 
+                        i * (GameVars.brickHeight + GameVars.brickTopOffset) 
+                                                + GameVars.brickTopOffset]})
+                    }))
+            }, [])
+            paddle = newPaddle()
+            status = StatusEnum.start
+            balls = balls.map((b) => newBall({position: b.position}))
+            score = 0
     }
 
-    
-
-    
     frameUpdate((dt) => {
         c.clearRect(0, 0, w, h);
         const updateBall = ((ball, i) => {
 
-            if (status == StatusEnum.pause) return ball
-                                   
-            else if (status == StatusEnum.start) {
+            switch (status) {
+            case StatusEnum.pause:
+                return ball
+            case StatusEnum.start:
                 const pos = add(ball.position, ball.velocity)
                 const b = newBall({position: pos, velocity: ball.velocity})
-
-                
                 const remainingBricks = bricks.map((br) => ifCollide(b, br))
-                                      .filter((collision) => !collision.ifCollide)
-                                      .map((collision) => collision.rect)
-
+                                    .filter((collision) =>!collision.ifCollide)
+                                    .map((collision) => collision.rect)
                 score = remainingBricks.length === bricks.length ? 
                                                 score : score + 10
                 const solids = [paddle, wall].concat(bricks)
                 const collision = solids.map((item) => ifCollide(b, item))
-                     .find((collision) => collision.ifCollide)
-               
+                    .find((collision) => collision.ifCollide)
                 bricks = remainingBricks             
-                return collision ? collision.rect.onCollide(b, collision.norm) : b
-            }
-            else if (status == StatusEnum.prestart){
-                return newBall({position: add(paddle.position,[i* GameVars.paddleWidth, -10]), 
+                return collision ? 
+                        collision.rect.onCollide(b, collision.norm) : b
+            case StatusEnum.prestart:
+            case StatusEnum.over:
+                return newBall({position: add(paddle.position,
+                                        [i* GameVars.paddleWidth, -10]), 
                                 velocity: ball.velocity})
+            default:
+                alert("Debug: Wrong Status code!")
             }
         })
 
@@ -316,8 +331,6 @@ window.onload = () => {
         })
         
         drawGameOverlay(c, w, h, score, status)
-        
-        
         
 
     })
