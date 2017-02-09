@@ -17,7 +17,9 @@ const StatusEnum = {
 const GameVars = (c, w, h) => {
     GameVars.w = w
     GameVars.h = h
-    GameVars.rate = 1
+    GameVars.rates = [0.8, 1, 1.5, 2]
+    GameVars.speedBoxText = ["slow", "medium", "fast", "ludicrous"]
+    GameVars.v = 1
     GameVars.ballMass = 8
     GameVars.settings = {position: [w/2 - 40, h/2 + 15], size: [80, 30]}
     GameVars.numBricksRows = 5
@@ -28,13 +30,14 @@ const GameVars = (c, w, h) => {
                         GameVars.brickLeftOffset) / GameVars.numBricksCols
     GameVars.brickHeight = h * .25 / (GameVars.numBricksRows + 1)
     GameVars.paddleWidth = w / 10
-    GameVars.paddleHeight = 20
+    GameVars.paddleHeight = 10
     GameVars.paddlePosy = h - 40
     GameVars.numBalls = 2
     const ww = w / 5, hh = h / 20
     GameVars.resumeBox = {position: [w/2 - ww/2, h/2], size: [ww, hh]}
     GameVars.speedBox = {position: [w/2 - ww * 0.8/2, h/2 + 95], 
                         size: [ ww * 0.8, hh * 0.8]}
+    GameVars.scorePerHit = 10
 }
 
 const random = (min=0, max=800, signed=false) => {
@@ -51,11 +54,11 @@ const abs = ([vx, vy]) => [Math.abs(vx), Math.abs(vy)]
 const vec = (A, B) => add(B, scale(A, -1))
 const pointInRect = (P, rect) => {
     return P[0] > rect.position[0] && P[0] < rect.position[0]+rect.size[0] 
-        && P[1] < rect.position[1] + rect.size[1] && P[1] > rect.size[1]
+        && P[1] < rect.position[1] + rect.size[1] && P[1] > rect.position[1]
 }
 
 const speedControl = () => {
-    const rate = GameVars.rate
+    const rate = GameVars.rates[GameVars.v]
     return [random(2 * rate, 3 * rate, true), 
         random(-3 * rate, -2 * rate)]
 }
@@ -108,9 +111,7 @@ const textInBox = (context, x, y, ww, hh, text, color="#000000") => {
 
 }
 
-const drawGameOverlay = (context, w, h, score, status) => {
-
-
+const drawGameOverlay = (context, w, h, metrics, status, win=false) => {
     switch (status) {
     case StatusEnum.prestart:
         drawOverlay(context, w, h, () => {
@@ -127,7 +128,8 @@ const drawGameOverlay = (context, w, h, score, status) => {
         context.lineWidth = 4
         context.strokeStyle = 'blue'
         context.textAlign="center"
-        context.strokeText(`Score: ${score}`, w / 2, h/2)
+        context.strokeText(`Score: ${metrics.bricksHits
+             * GameVars.scorePerHit}`, w / 2, h/2)
 
         const x = position[0], y = position[1]
         const ww = size[0], hh = size[1]
@@ -143,7 +145,7 @@ const drawGameOverlay = (context, w, h, score, status) => {
             position = GameVars.speedBox.position
             size = GameVars.speedBox.size
             textInBox(context, position[0], position[1], 
-                    size[0], size[1], "Medium", "white")
+                    size[0], size[1], GameVars.speedBoxText[GameVars.v], "white")
         })
         break
     case StatusEnum.over:
@@ -151,10 +153,17 @@ const drawGameOverlay = (context, w, h, score, status) => {
             const {position, size} = GameVars.resumeBox
             textInBox(context, position[0], position[1], 
                     size[0], size[1], "Start Again", "white")
-            displayText(context, `Score: ${score}`, w / 2, h/2 + 75, 
+            let ww = w / 2
+            let hh = h / 2 + 75
+            const stats = metricsForPlayer(metrics)
+            Object.keys(stats).forEach((k, i) => {
+                displayText(context, `${k}: ${stats[k]}`, ww, hh + 40 * i, 
                                         '15pt Calibri', "white")
-            displayText(context, `Highest Score: ${score}`, w / 2, h/2 + 120, 
-                                        '15pt Calibri', "white")
+            })
+            if (win) {
+                displayText(context, `Congratulations! You WIN!!!!`, ww, h / 2 - 150, 
+                                        '30pt Calibri', "white")
+            }
         })
     }
     
@@ -184,7 +193,11 @@ const newBall = ({
 const newPaddle = ({
         position= [GameVars.w / 2, GameVars.paddlePosy],
         size = [GameVars.paddleWidth, GameVars.paddleHeight],
-        onCollide = bounce
+        onCollide = (ball, norm) => {
+            metrics = updateMetrics(metrics, 
+                {numPaddleHits: metrics.numPaddleHits + 1})
+            return bounce(ball, norm)
+        }
     } = {}) => {
         return {position, size, onCollide}
 }
@@ -197,8 +210,56 @@ const newPaddle = ({
         return {position, size, onCollide}
 }
 
+const updateMetrics = (oldMetrics, updates) => {
+    const newMetrics = JSON.parse(JSON.stringify(oldMetrics))
+    Object.keys(updates).forEach((k) => newMetrics[k] = updates[k])
+    return newMetrics
+}
+
+const metricsForPlayer = ({bricksHits, numDirectionChanges, 
+            avgLocation, numPaddleHits, beginTime, endTime}) => {
+    const player = {}
+    const score = bricksHits * GameVars.scorePerHit
+    const hist = localStorage.getItem("hist")
+    const duration = endTime - beginTime
+    let highScore = score
+    if (hist) {
+        const {highest} = JSON.parse(hist)
+        highScore = Math.max(parseInt(highest), highScore)
+    }
+    localStorage.setItem("hist", JSON.stringify({highest: highScore}))
+
+    return {
+        "Highest Score": highScore,
+        "Current Score": score,
+        "Number of Direction Changes": numDirectionChanges,
+        "Number of Paddle Hits": numPaddleHits,
+        "Number of Bricks Eliminated Per Paddle Hit": bricksHits / numPaddleHits,
+        "Time duration (seconds)": Math.floor(duration / 1000),
+    }
+
+}
+
+const newMetrics = ({
+    bricksHits=0, 
+    numDirectionChanges=1,
+    //start with two balls
+    numPaddleHits=2, 
+    beginTime=0, 
+    endTime=0
+} = {}) => {
+    return {bricksHits, numDirectionChanges, numPaddleHits, beginTime, endTime}
+}
+
+const restrictInCanvas = (x) => {
+        rightMost = GameVars.w - GameVars.paddleWidth
+        return newPaddle({position: [x < rightMost ? 
+                            x : rightMost, GameVars.paddlePosy]})
+}
+
 
 window.onload = () => {
+    const test = localStorage.getItem("username")
     const canvas = document.getElementById('app')
     canvas.width = Math.min(window.innerHeight * 2/3, window.innerWidth);
     canvas.height = window.innerHeight;
@@ -206,18 +267,20 @@ window.onload = () => {
     const w = canvas.width, h = canvas.height
     let status = StatusEnum.prestart
     GameVars(c, w, h)
-    
-    const restrictInCanvas = (x) => {
-        rightMost = w - GameVars.paddleWidth
-        return newPaddle({position: [x < rightMost ? 
-                            x : rightMost, GameVars.paddlePosy]})
-    }
-
+    window.metrics = newMetrics()
     let paddle = newPaddle()
+    let paddleToLeft = true
     
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect()
-        paddle = restrictInCanvas(getMousePos(canvas, e)[0])
+        const p = restrictInCanvas(getMousePos(canvas, e)[0])
+        if (status === StatusEnum.start && 
+                (p.position[0] < paddle.position[0]) !== paddleToLeft) {
+            paddleToLeft = !paddleToLeft
+            metrics = updateMetrics(metrics,{"numDirectionChanges": 
+                            metrics.numDirectionChanges + 1})
+        }
+        paddle = p
     }, false)
 
     canvas.addEventListener('click', (e) => {
@@ -235,7 +298,11 @@ window.onload = () => {
             status = pointInRect(mouse, GameVars.resumeBox) ?
                             StatusEnum.start : status
             if (pointInRect(mouse, GameVars.speedBox)) {
-                speedControl()
+                const oldrate = GameVars.rates[GameVars.v]
+                GameVars.v = (GameVars.v + 1) % GameVars.rates.length
+                const newrate = GameVars.rates[GameVars.v]
+                balls = balls.map((b) => newBall({position: b.position,
+                                velocity: scale(b.velocity, newrate/oldrate)}))
             }
             break
         case StatusEnum.over:
@@ -252,8 +319,10 @@ window.onload = () => {
 
     const wall = {position: [0, 0], size: [w, h], 
         onCollide: (ball, norm) => {
+        if (status !== StatusEnum.start) return ball
         if (norm[0] === 0 && norm[1] === -1) {
             status = StatusEnum.over
+            metrics = updateMetrics(metrics, {endTime: Date.now()})
             return ball
         }else {
             return bounce(ball, norm)
@@ -262,8 +331,7 @@ window.onload = () => {
     
     let bricks = []
     let balls = Array(GameVars.numBalls).fill(0).map((_) => newBall())
-    let score = 0
-
+    let win = false
     const initGame = () => {
         bricks = Array(GameVars.numBricksRows).fill(0).reduce((pre, row, i) => {
                 return pre.concat(Array(GameVars.numBricksCols).fill(0)
@@ -278,7 +346,8 @@ window.onload = () => {
             paddle = newPaddle()
             status = StatusEnum.start
             balls = balls.map((b) => newBall({position: b.position}))
-            score = 0
+            metrics = updateMetrics(newMetrics(), {beginTime: Date.now()})
+            win = false
     }
 
     frameUpdate((dt) => {
@@ -294,12 +363,17 @@ window.onload = () => {
                 const remainingBricks = bricks.map((br) => ifCollide(b, br))
                                     .filter((collision) =>!collision.ifCollide)
                                     .map((collision) => collision.rect)
-                score = remainingBricks.length === bricks.length ? 
-                                                score : score + 10
+                metrics = remainingBricks.length === bricks.length ? 
+                                 metrics : updateMetrics(metrics, 
+                                        {bricksHits: metrics.bricksHits + 1})
                 const solids = [paddle, wall].concat(bricks)
                 const collision = solids.map((item) => ifCollide(b, item))
                     .find((collision) => collision.ifCollide)
-                bricks = remainingBricks             
+                bricks = remainingBricks 
+                if (bricks.length === 0) {
+                    status = StatusEnum.over
+                    win = true
+                }     
                 return collision ? 
                         collision.rect.onCollide(b, collision.norm) : b
             case StatusEnum.prestart:
@@ -313,8 +387,6 @@ window.onload = () => {
         })
 
         balls = balls.map((b, i) => updateBall(b, i))
-
-
         bricks.forEach((brick) => {
             c.fillStyle = 'red'
             c.fillRect(brick.position[0], brick.position[1], 
@@ -330,7 +402,7 @@ window.onload = () => {
             c.fill()
         })
         
-        drawGameOverlay(c, w, h, score, status)
+        drawGameOverlay(c, w, h, metrics, status, win)
         
 
     })
