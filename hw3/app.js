@@ -30,7 +30,7 @@ const GameVars = (c, w, h) => {
                         GameVars.brickLeftOffset) / GameVars.numBricksCols
     GameVars.brickHeight = h * .25 / (GameVars.numBricksRows + 1)
     GameVars.paddleWidth = w / 10
-    GameVars.paddleHeight = 10
+    GameVars.paddleHeight = 6
     GameVars.paddlePosy = h - 40
     GameVars.numBalls = 2
     const ww = w / 5, hh = h / 20
@@ -59,6 +59,7 @@ const pointInRect = (P, rect) => {
 
 const speedControl = () => {
     const rate = GameVars.rates[GameVars.v]
+    //The ball should have an upward velocity initially
     return [random(2 * rate, 3 * rate, true), 
         random(-3 * rate, -2 * rate)]
 }
@@ -80,10 +81,12 @@ const ifCollide = (ball, rect) => {
         return {ifCollide: false, rect: rect}
     }
     if (outsideRect[0] < 0 && Math.abs(outsideRect[1]) < ball.mass) {
-        return {ifCollide: true, norm: [0, dist[1] * outsideRect[1] < 0 ? -1 : 1], rect: rect}
+        return {ifCollide: true, norm: [0, 
+                dist[1] * outsideRect[1] < 0 ? -1 : 1], rect: rect}
     }
     if (outsideRect[1] < 0 && Math.abs(outsideRect[0]) < ball.mass) {
-        return {ifCollide: true, norm: [dist[0] * outsideRect[0] < 0 ? -1 : 1, 0], rect: rect}
+        return {ifCollide: true, norm: 
+                [dist[0] * outsideRect[0] < 0 ? -1 : 1, 0], rect: rect}
     }
     const corner = mult(outsideRect, outsideRect) < Math.pow(ball.mass, 2)
     if (!corner) return {ifCollide: false, rect: rect}
@@ -145,7 +148,8 @@ const drawGameOverlay = (context, w, h, metrics, status, win=false) => {
             position = GameVars.speedBox.position
             size = GameVars.speedBox.size
             textInBox(context, position[0], position[1], 
-                    size[0], size[1], GameVars.speedBoxText[GameVars.v], "white")
+                    size[0], size[1], 
+                    GameVars.speedBoxText[GameVars.v], "white")
         })
         break
     case StatusEnum.over:
@@ -161,8 +165,8 @@ const drawGameOverlay = (context, w, h, metrics, status, win=false) => {
                                         '15pt Calibri', "white")
             })
             if (win) {
-                displayText(context, `Congratulations! You WIN!!!!`, ww, h / 2 - 150, 
-                                        '30pt Calibri', "white")
+                displayText(context, `Congratulations! You WIN!!!!`, 
+                ww, h / 2 - 150, '30pt Calibri', "white")
             }
         })
     }
@@ -234,7 +238,8 @@ const metricsForPlayer = ({bricksHits, numDirectionChanges,
         "Current Score": score,
         "Number of Direction Changes": numDirectionChanges,
         "Number of Paddle Hits": numPaddleHits,
-        "Number of Bricks Eliminated Per Paddle Hit": bricksHits / numPaddleHits,
+        "Number of Bricks Eliminated Per Paddle Hit":
+                                     bricksHits / numPaddleHits,
         "Time duration (seconds)": Math.floor(duration / 1000),
     }
 
@@ -388,7 +393,7 @@ window.onload = () => {
 
         balls = balls.map((b, i) => updateBall(b, i))
         bricks.forEach((brick) => {
-            c.fillStyle = 'red'
+            c.fillStyle = "#"+((1<<24)*Math.random()|0).toString(16)
             c.fillRect(brick.position[0], brick.position[1], 
                         brick.size[0], brick.size[1]);
         })
