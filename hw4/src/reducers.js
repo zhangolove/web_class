@@ -1,16 +1,22 @@
 import * as Actions from './actions'
 import {Locations, ActionTypes} from './enums'
+
 const initialFollowers = require('./data/followers.json').followers
+const initialArticles = require('./data/articles.json').articles
+const initialNumArticles = initialArticles.length
 
 const Reducer = (state = {
     nextId: 3,
+    nextArticleId: initialNumArticles,
     location: Locations.MAIN,
     user: {
         name: 'Chongzhang',
         pic: 'http://cvcl.mit.edu/hybrid/MonroeEnstein_AudeOliva2007.jpg',
         headline: 'default headline'
     },
-    followers: initialFollowers
+    followers: initialFollowers,
+    articles: initialArticles,
+    filter: null
 }, action) => {
     switch (action.type) {
         case ActionTypes.GO_TO_PAGE:
@@ -30,6 +36,20 @@ const Reducer = (state = {
                         }
                     ]
                  }
+        case ActionTypes.ADD_ARTICLE:
+            return { ...state, nextId: state.nextArticleId + 1,
+                    articles: [...state.articles,
+                        { _id: state.nextId, 
+                          text: action.text,
+                          date: action.date,
+                          author: action.author,
+                          img: null,
+                          comments: []
+                        }
+                    ]
+            }
+        case ActionTypes.CHANGE_FILTER:
+            return {...state, filter: action.filter}
         default:
             return state
     }

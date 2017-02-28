@@ -5,6 +5,7 @@ import { Locations} from '../../enums'
 import { toLink } from '../../utils'
 import Headline from './headline'
 import Following from './following'
+import ArticleViews from '../articles/articlesView'
 
 
 const main = ({mainNavBar}) => (
@@ -12,6 +13,7 @@ const main = ({mainNavBar}) => (
         <NavbarInstance {...mainNavBar} />
         <Headline />
         <Following />
+        <ArticleViews />
     </div>
 
 )
