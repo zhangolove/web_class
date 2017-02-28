@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 
 
-const FieldGroup = ({ id, label, ...props }) => (
-    <FormGroup controlId={id}>
+const FieldGroup = ({ id, label, help, validation, ...props }) => (
+    <FormGroup controlId={id} validationState={validation}>
       <ControlLabel>{label}</ControlLabel>
       <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
 )
 

@@ -1,13 +1,8 @@
-export const UPDATE_TEXT = 'UPDATE_TEXT'
-export const ERROR = 'ERROR'
+import {ActionTypes} from './enums'
 
-export const ActionTypes = {
-    UPDATE_TEXT: 'UPDATE_TEXT', 
-}
 
-export const updateText = (text) => {
-    if (text.length > 5) {
-        return { type: UPDATE_TEXT, text }
-    }
-    return { type: ERROR, message: 'Text must be longer than 5 characters'}
+
+export const goToPage = (location) => {
+    console.log("goToPage")
+    return { type: ActionTypes.GO_TO_PAGE, location }
 }

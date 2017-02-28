@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Locations } from '../enums'
 
 import Main from './main/main'
 import Profile from './profile/profile'
 import Landing from './auth/landing'
 
+
 const pages = ({location}) => {
-    if (location == "MAIN_PAGE") {
+    if (location == Locations.MAIN) {
         return <Main />
-    } else if (location == "PROFILE_PAGE") {
+    } else if (location == Locations.PROFILE) {
         return <Profile />
     } else {
         return <Landing />
