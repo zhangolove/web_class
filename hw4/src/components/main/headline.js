@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { FormControl, Button } from 'react-bootstrap'
+import { FormControl, Button, Image } from 'react-bootstrap'
 import { FieldGroup } from '../forms.js'
-import { updateHeadline } from './followingActions'
+import { ActionTypes } from '../../enums'
 
 const headline = ({headline, name, pic, update}) => {
 
@@ -20,7 +20,7 @@ const headline = ({headline, name, pic, update}) => {
     return (
         <div>
             <h3> {name} </h3>
-            <img src={pic}  />
+            <Image src={pic} rounded/>
             <h4> {headline} </h4>
             <form onSubmit={handleSubmit}>
                 <FormControl
@@ -42,7 +42,8 @@ const Headline = connect(
         ...state.user
     }), 
     (dispatch) => ({
-        update: (text) => dispatch(updateHeadline(text))
+        update: (text) => dispatch(
+            {type: ActionTypes.UPDATE_HEADLINE,text})
     })
 )(headline)
 

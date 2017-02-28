@@ -1,4 +1,4 @@
-const initialItems = require('./initialState.json')
+const initialItems = require('./initialState.json').followers
 
 // todoItems: [
 //     {id: 0, text: "This is an item", done: false},
