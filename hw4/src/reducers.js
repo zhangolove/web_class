@@ -2,7 +2,7 @@ import * as Actions from './actions'
 import {Locations, ActionTypes} from './enums'
 
 const Reducer = (state = {
-    location: Locations.LANDING
+    location: Locations.MAIN
 }, action) => {
     switch (action.type) {
         case ActionTypes.GO_TO_PAGE:
