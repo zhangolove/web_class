@@ -4,13 +4,19 @@ import { NavbarInstance, toLink } from '../nav'
 import { Locations} from '../../enums'
 import Avatar from './avatar'
 import ProfileForm from './profileForm'
-
+import { Grid, Col, Row } from 'react-bootstrap'
 
 const profile = ({profileNavBar}) => (
-    <div>
+     <div>
         <NavbarInstance {...profileNavBar} />
-        <Avatar />
-        <ProfileForm />
+        <Grid className="show-grid">
+            <Row>
+                <Col sm={3}  md={3}><Avatar /></Col>
+                <Col sm={9}  md={9} ><ProfileForm /></Col>
+            </Row>
+            
+        
+        </Grid>
     </div>
 )
 
@@ -28,3 +34,5 @@ const Profile = connect(
 )(profile)
 
 export default Profile
+
+

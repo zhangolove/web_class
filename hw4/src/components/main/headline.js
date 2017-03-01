@@ -19,12 +19,13 @@ const headline = ({headline, name, pic, update}) => {
     return (
         <div>
             <h3> {name} </h3>
-            <Image src={pic} rounded/>
+            <Image src={pic} rounded responsive/>
             <h4> {headline} </h4>
             <form onSubmit={handleSubmit}>
                 <FormControl
                     type="text"
                     ref={(node)=>{input=ReactDOM.findDOMNode(node)}}
+                    placeholder="Update headline"
                     required
                 />
                 <Button type="submit">

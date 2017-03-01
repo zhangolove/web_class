@@ -8,7 +8,7 @@ import {FieldGroup} from '../forms'
 
 const avatar = ({pic}) => (
     <div>
-        <Image src={pic} rounded/>
+        <Image src={pic} rounded responsive/>
         <FieldGroup id="fieldGroupAvartar" label="Upload new profile avatar" type="file" />
     </div>
 )

@@ -28,6 +28,7 @@ const AddFollowing = ({ addMember }) => {
 
 const following = ({followings, addMember}) => (
     <div>
+        <h4>My Followings</h4>
         <ListGroup componentClass="ul">
             {followings.map(({id, name, headline, pic}) => (
                 <MiniProfile key={id} id={id} 

@@ -12,7 +12,7 @@ const Reducer = (state = {
     //these ids are useful when removing objects
     nextFollowingId: initialNumFollowings,
     nextArticleId: initialNumArticles,
-    location: Locations.LANDING,
+    location: Locations.MAIN,
     user: initialProfile,
     followings: initialFollowing,
     articles: initialArticles,

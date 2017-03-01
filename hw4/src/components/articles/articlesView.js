@@ -33,6 +33,7 @@ const AddArticle = ({ addArticle }) => {
 
 const articleViews = ({articles, addArticle}) => (
     <div>
+        <AddArticle addArticle={addArticle} />
         <ArticleSearchBox />
         <ListGroup componentClass="ul">
             {articles.map(({_id,text,date,img,comments,author}) => (
@@ -41,7 +42,6 @@ const articleViews = ({articles, addArticle}) => (
                     comments={comments} author={author}/>
             ))}
         </ ListGroup>
-        <AddArticle addArticle={addArticle} />
     </div>
 )
 
