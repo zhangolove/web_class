@@ -1,3 +1,6 @@
+require('expose?$!expose?jQuery!jquery')
+require("bootstrap-webpack")
+require('./style.css')
 import React from 'react'
 import { render } from 'react-dom'
 
@@ -7,9 +10,6 @@ import { createStore, applyMiddleware } from 'redux'
 
 import Reducer from './reducers'
 import App from './components/App'
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './style.css'
 
 
 const logger = createLogger()

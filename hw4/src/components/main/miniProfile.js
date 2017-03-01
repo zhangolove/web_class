@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { ActionTypes } from '../../enums'
 
 
-
 const miniProfile = ({name, pic, headline, remove}) => (
     <li className="list-group-item">
         <Media>
@@ -15,7 +14,7 @@ const miniProfile = ({name, pic, headline, remove}) => (
         <Media.Body>
             <Media.Heading>{name}</Media.Heading> 
             <p> {headline} </p>
-            <i className="glyphicon glyphicon-remove" onClick={remove} />
+            <Button><Glyphicon glyph="remove" onClick={remove}/></Button>
         </Media.Body>
         </Media>
     </li>
