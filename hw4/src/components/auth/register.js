@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { validate_pwd, validate_dob } from '../forms.js'
-import { goToPage, Locations } from './authActions'
+import {Locations, ActionTypes} from '../../enums'
 
 
 
@@ -11,7 +11,9 @@ const registerForm = ({validate}) => {
     const refs = {}
 
     const onChange = (e) => {e.target.setCustomValidity('')}
-
+    //to save space, instead of listing as <FormGroup>, 
+    //I list the fields compactly as objects
+    //which also makes it easier to insert ref and avoid repetition
     const fields = [
         {id: "AName", type: "text", label: "Account Name", 
           pattern: "^[A-Za-z][A-Za-z0-9]+", placeholder: "Enter Account Name"},
@@ -66,7 +68,7 @@ const Register = connect(
         validate: (refs) => {
             const {dob, pwd, pwd1} = refs
             if (validate_dob(dob) && validate_pwd(pwd, pwd1)) {
-                dispatch(goToPage(Locations.MAIN))
+                dispatch({type: ActionTypes.GO_TO_PAGE, location:Locations.MAIN})
             } 
         }
     })

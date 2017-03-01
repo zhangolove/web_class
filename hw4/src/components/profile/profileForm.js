@@ -10,6 +10,10 @@ import {ActionTypes} from '../../enums'
 const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
     const refs = {}
     const onChange = (e) => {e.target.setCustomValidity('')}
+    //This representation, inspired by Scott, is to save space.
+    //Instead of listing as <FormGroup>, 
+    //I list the fields compactly as objects,
+    //which also makes it easier to insert ref and avoid repetition
     const props = [
         {id: "name", type: "text", label: "Display Name", placeholder: name},
         {id: "email", type: "email", label: "Email address", placeholder: email,

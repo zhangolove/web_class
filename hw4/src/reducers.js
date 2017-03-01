@@ -1,15 +1,16 @@
-import * as Actions from './actions'
 import {Locations, ActionTypes} from './enums'
 
 const initialFollowing = require('./data/followings.json').followings
 const rawArticles = require('./data/articles.json').articles
+//need to convert string to date object for later sorting
 const initialArticles = rawArticles.map((article) => ({...article, date: new Date(article.date)}))
 const initialProfile = require('./data/profile.json').user
 const initialNumArticles = initialArticles.length
 const initialNumFollowings = initialFollowing.length
 
 const Reducer = (state = {
-    nextId: initialNumFollowings,
+    //these ids are useful when removing objects
+    nextFollowingId: initialNumFollowings,
     nextArticleId: initialNumArticles,
     location: Locations.LANDING,
     user: initialProfile,
@@ -26,11 +27,12 @@ const Reducer = (state = {
             return { ...state,
                 followings: state.followings.filter(({id}) => id != action.id) }
         case ActionTypes.ADD_FOLLOWING:
-            return { ...state, nextId: state.nextId + 1,
+            //currently headline and pic are hardcoded
+            return { ...state, nextFollowingId: state.nextFollowingId + 1,
                     followings: [...state.followings,
-                        { id: state.nextId, 
+                        { id: state.nextFollowingId, 
                         name: action.name, 
-                        headline:`I am Person ${state.nextId}`,
+                        headline:`I am Person ${state.nextFollowingId}`,
                         pic: "https://unsplash.it/200/300?random"
                         }
                     ]

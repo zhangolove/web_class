@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { NavbarInstance } from '../nav'
+import { NavbarInstance, toLink} from '../nav'
 import { Locations} from '../../enums'
-import { toLink } from '../../utils'
 import Headline from './headline'
 import Following from './following'
 import ArticleViews from '../articles/articlesView'
+
 
 
 const main = ({mainNavBar}) => (

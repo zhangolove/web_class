@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { NavbarInstance } from '../nav'
+import { NavbarInstance, toLink } from '../nav'
 import { Locations} from '../../enums'
-import { toLink } from '../../utils'
 import Avatar from './avatar'
 import ProfileForm from './profileForm'
 

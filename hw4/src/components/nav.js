@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import {Navbar, Nav, NavItem, MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux'
+import {ActionTypes} from '../enums'
 
 export const NavbarInstance = ({brand, links}) => (
   <Navbar inverse collapseOnSelect>
@@ -20,3 +21,7 @@ export const NavbarInstance = ({brand, links}) => (
   </Navbar>
 )
 
+export const toLink = (text, dest, dispatch) => ({
+    text,
+    action: () => dispatch({type: ActionTypes.GO_TO_PAGE,  location: dest})
+})

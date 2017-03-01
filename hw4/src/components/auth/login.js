@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { FieldGroup } from '../forms.js'
-import { goToPage, Locations } from './authActions'
-
+import {Locations, ActionTypes} from '../../enums'
 
 const login = ({redirect}) => {
 
@@ -37,7 +36,7 @@ const login = ({redirect}) => {
 const Login = connect(
     null,
     (dispatch) => ({
-        redirect: () => dispatch(goToPage(Locations.MAIN))
+        redirect: () => dispatch({type: ActionTypes.GO_TO_PAGE, location:Locations.MAIN})
     })
 )(login)
 

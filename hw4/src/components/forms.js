@@ -42,5 +42,5 @@ const validate_dob = (dob_field) => {
         }
 }
 
-
+//these are used by many components
 export {FieldGroup, validate_pwd, validate_dob}

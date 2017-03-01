@@ -1,3 +1,4 @@
+//for page redirection
 export const Locations = {
     MAIN: 'MAIN_PAGE',
     LANDING: 'LANDING_PAGE',
