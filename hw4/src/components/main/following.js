@@ -26,10 +26,10 @@ const AddFollowing = ({ addMember }) => {
 
 
 
-const following = ({followers, addMember}) => (
+const following = ({followings, addMember}) => (
     <div>
         <ListGroup componentClass="ul">
-            {followers.map(({id, name, headline, pic}) => (
+            {followings.map(({id, name, headline, pic}) => (
                 <MiniProfile key={id} id={id} 
                     name={name} headline={headline} pic={pic}/>
             ))}
@@ -39,9 +39,9 @@ const following = ({followers, addMember}) => (
 )
 
 const Following = connect(
-    (state) => ({followers: state.followers}),
+    (state) => ({followings: state.followings}),
     (dispatch) => ({addMember: (name)=>
-                    dispatch({type: ActionTypes.ADD_FOLLOWER, name})})
+                    dispatch({type: ActionTypes.ADD_FOLLOWING, name})})
 )(following)
 
 export default Following

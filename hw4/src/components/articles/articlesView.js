@@ -47,7 +47,7 @@ const articleViews = ({articles, addArticle}) => (
 
 const ArticleViews = connect(
     (state) => ({articles: filterArticles(state.articles, state.filter)
-                    .sort((a, b) => a.date < b.date)}),
+                    .sort((a, b) =>  b.date - a.date)}),
     (dispatch) => ({addArticle: (text,date,author)=>
                     dispatch({type: ActionTypes.ADD_ARTICLE, 
                                 text, date, author})})

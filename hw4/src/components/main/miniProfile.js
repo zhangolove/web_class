@@ -22,7 +22,7 @@ const miniProfile = ({name, pic, headline, remove}) => (
 )
 
 const MiniProfile = connect(null, (dispatch, ownProps) => ({
-        remove: () => dispatch({ type: ActionTypes.REMOVE_FOLLOWER, 
+        remove: () => dispatch({ type: ActionTypes.REMOVE_FOLLOWING, 
                                 id: ownProps.id }),
     })
 )(miniProfile)

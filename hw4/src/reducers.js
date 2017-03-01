@@ -1,17 +1,19 @@
 import * as Actions from './actions'
 import {Locations, ActionTypes} from './enums'
 
-const initialFollowers = require('./data/followers.json').followers
-const initialArticles = require('./data/articles.json').articles
+const initialFollowing = require('./data/followings.json').followings
+const rawArticles = require('./data/articles.json').articles
+const initialArticles = rawArticles.map((article) => ({...article, date: new Date(article.date)}))
 const initialProfile = require('./data/profile.json').user
 const initialNumArticles = initialArticles.length
+const initialNumFollowings = initialFollowing.length
 
 const Reducer = (state = {
-    nextId: 3,
+    nextId: initialNumFollowings,
     nextArticleId: initialNumArticles,
-    location: Locations.PROFILE,
+    location: Locations.MAIN,
     user: initialProfile,
-    followers: initialFollowers,
+    followings: initialFollowing,
     articles: initialArticles,
     filter: null
 }, action) => {
@@ -20,12 +22,12 @@ const Reducer = (state = {
             return { ...state, location: action.location }
         case ActionTypes.UPDATE_HEADLINE:
             return { ...state, user: { ...state.user, headline: action.text} }
-        case ActionTypes.REMOVE_FOLLOWER:
+        case ActionTypes.REMOVE_FOLLOWING:
             return { ...state,
-                followers: state.followers.filter(({id}) => id != action.id) }
-        case ActionTypes.ADD_FOLLOWER:
+                followings: state.followings.filter(({id}) => id != action.id) }
+        case ActionTypes.ADD_FOLLOWING:
             return { ...state, nextId: state.nextId + 1,
-                    followers: [...state.followers,
+                    followings: [...state.followings,
                         { id: state.nextId, 
                         name: action.name, 
                         headline:`I am Person ${state.nextId}`,
