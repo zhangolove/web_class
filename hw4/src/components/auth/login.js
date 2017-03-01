@@ -5,8 +5,14 @@ import { FieldGroup } from '../forms.js'
 import { goToPage, Locations } from './authActions'
 
 
-const login = ({redirect}) => (
-    <form onSubmit={redirect}>
+const login = ({redirect}) => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        redirect()
+    }
+    return(
+    <form onSubmit={handleSubmit}>
         <h2> Login </h2>
         <FieldGroup
             id="formControlsEmail"
@@ -25,7 +31,8 @@ const login = ({redirect}) => (
             Login
         </Button>
     </form>
-)
+    )
+}
 
 const Login = connect(
     null,

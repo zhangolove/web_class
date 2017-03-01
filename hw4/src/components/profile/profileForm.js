@@ -8,24 +8,24 @@ import {ActionTypes} from '../../enums'
 
 
 const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
-    let refs = {}
-
+    const refs = {}
+    const onChange = (e) => {e.target.setCustomValidity('')}
     const props = [
         {id: "name", type: "text", label: "Display Name", placeholder: name},
         {id: "email", type: "email", label: "Email address", placeholder: email,
-            pattern:"^[A-Za-z0-9]+@[A-Za-z0-9.]+\.[a-zA-Z]+$"},
+            pattern:"^[A-Za-z0-9]+@[A-Za-z0-9.]+\\.[a-zA-Z]+$"},
         {id: "dob", type: "text",label:"Date of Birth",placeholder: dob, readOnly: true},
-        {id: "phone", type: "tel", label: "Phone", placeholder: phone, pattern: "^\d{10}$"},
-        {id: "zipcode", type: "text", label: "Zipcode", placeholder: zipcode, pattern: "^\d{5}$"},
+        {id: "phone", type: "tel", label: "Phone", placeholder: phone, pattern: "^\\d{10}$"},
+        {id: "zipcode", type: "text", label: "Zipcode", placeholder: zipcode, pattern: "^\\d{5}$"},
         {id: "pwd", type: "password", label: "Password"},
-        {id: "pwd1", type: "password", label: "Confirm Password"}
+        {id: "pwd1", type: "password", label: "Confirm Password", onChange}
     ]
-
+    
     const _update = (e) => {
         e.preventDefault();
         update(refs)
     }
-    
+
     return (
     <form onSubmit={_update}>
         {

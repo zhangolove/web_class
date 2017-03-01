@@ -25,7 +25,6 @@ const validate_pwd = (pwd0, pwd1) => {
 
 
 const validate_dob = (dob_field) => {
-        console.log(`dob ${dob_field.value}`)
         const today = new Date();
         const dob = new Date(dob_field.value)
         let year = today.getFullYear() - dob.getFullYear()

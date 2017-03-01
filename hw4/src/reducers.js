@@ -11,7 +11,7 @@ const initialNumFollowings = initialFollowing.length
 const Reducer = (state = {
     nextId: initialNumFollowings,
     nextArticleId: initialNumArticles,
-    location: Locations.MAIN,
+    location: Locations.LANDING,
     user: initialProfile,
     followings: initialFollowing,
     articles: initialArticles,
