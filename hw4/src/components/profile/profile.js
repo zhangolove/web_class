@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { NavbarInstance } from '../nav'
 import { Locations} from '../../enums'
 import { toLink } from '../../utils'
+import Avatar from './avatar'
+import ProfileForm from './profileForm'
 
 
 const profile = ({profileNavBar}) => (
-    <NavbarInstance {...profileNavBar} />
+    <div>
+        <NavbarInstance {...profileNavBar} />
+        <Avatar />
+        <ProfileForm />
+    </div>
 )
 
 const Profile = connect(

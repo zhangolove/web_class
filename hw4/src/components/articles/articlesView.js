@@ -5,6 +5,7 @@ import {FormControl, ListGroup, Button} from 'react-bootstrap'
 import { ActionTypes } from '../../enums'
 import Article from './article'
 import {filterArticles, ArticleSearchBox} from './filterArticles'
+import {FieldGroup} from '../forms'
 
 
 
@@ -23,6 +24,7 @@ const AddArticle = ({ addArticle }) => {
             placeholder="Say something...please" 
             ref={(node) => newArticle = ReactDOM.findDOMNode(node)} />
         <Button name="btnAddArticle" onClick={_addArticle}>Post</Button>
+        <FieldGroup id="fieldGroupPostImg" label="Attach a picture" type="file" />
     </span>)
 }
 
@@ -44,7 +46,8 @@ const articleViews = ({articles, addArticle}) => (
 )
 
 const ArticleViews = connect(
-    (state) => ({articles: filterArticles(state.articles, state.filter)}),
+    (state) => ({articles: filterArticles(state.articles, state.filter)
+                    .sort((a, b) => a.date < b.date)}),
     (dispatch) => ({addArticle: (text,date,author)=>
                     dispatch({type: ActionTypes.ADD_ARTICLE, 
                                 text, date, author})})

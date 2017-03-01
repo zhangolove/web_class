@@ -1,0 +1,13 @@
+{
+    "user": 
+     {  "name": "Chongzhang", 
+        "pic": "http://cvcl.mit.edu/hybrid/MonroeEnstein_AudeOliva2007.jpg",
+        "headline": "default headline",
+        "dob": "03/28/1995",
+        "email": "a@gmail.com",
+        "phone": "1234567890",
+        "zipcode": "77005",
+        "pwd": "1234"
+     }
+         
+}

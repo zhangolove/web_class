@@ -3,17 +3,14 @@ import {Locations, ActionTypes} from './enums'
 
 const initialFollowers = require('./data/followers.json').followers
 const initialArticles = require('./data/articles.json').articles
+const initialProfile = require('./data/profile.json').user
 const initialNumArticles = initialArticles.length
 
 const Reducer = (state = {
     nextId: 3,
     nextArticleId: initialNumArticles,
-    location: Locations.MAIN,
-    user: {
-        name: 'Chongzhang',
-        pic: 'http://cvcl.mit.edu/hybrid/MonroeEnstein_AudeOliva2007.jpg',
-        headline: 'default headline'
-    },
+    location: Locations.PROFILE,
+    user: initialProfile,
     followers: initialFollowers,
     articles: initialArticles,
     filter: null
@@ -37,9 +34,9 @@ const Reducer = (state = {
                     ]
                  }
         case ActionTypes.ADD_ARTICLE:
-            return { ...state, nextId: state.nextArticleId + 1,
+            return { ...state, nextArticleId: state.nextArticleId + 1,
                     articles: [...state.articles,
-                        { _id: state.nextId, 
+                        { _id: state.nextArticleId, 
                           text: action.text,
                           date: action.date,
                           author: action.author,
@@ -50,6 +47,8 @@ const Reducer = (state = {
             }
         case ActionTypes.CHANGE_FILTER:
             return {...state, filter: action.filter}
+        case ActionTypes.UPDATE_PROFILE:
+            return {...state, user: {...state.user, ...action.fields}}
         default:
             return state
     }

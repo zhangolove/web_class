@@ -1,38 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { FieldGroup } from '../forms.js'
+import { FieldGroup, validate_pwd, validate_dob } from '../forms.js'
 import { goToPage, Locations } from './authActions'
 
 
 
-const validate_pwd = (pwd0, pwd1) => {
-    if (pwd0.value !== pwd1.value) {
-        pwd1.setCustomValidity("password does not match")
-        return fasle
-    }
-    return true
-}
-
-
-const validate_dob = (dob_field) => {
-        console.log(`dob ${dob_field.value}`)
-        const today = new Date();
-        const dob = new Date(dob_field.value)
-        let year = today.getFullYear() - dob.getFullYear()
-        const month = today.getMonth() - dob.getMonth();
-        if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
-            year--;
-        }
-        if (year >= 18) {
-            return true
-        } else {
-            const msg = "Only individuals 18 years of age or \
-                older on the day of registration are allowed to register"
-            dob_field.setCustomValidity(msg)
-            return false
-        }
-}
 
 
 
@@ -47,9 +20,6 @@ class register extends React.Component {
     }
 
     handleSubmit(e) {
-        console.log("handle submit")
-        
-        console.log(this.state)
         const {dob, pwd0, pwd1} = this.state
         if (validate_dob(dob) && validate_pwd(pwd0, pwd1)) {
             this.props.redirect()
@@ -60,7 +30,6 @@ class register extends React.Component {
     }
 
     handleChange(event, key) {
-        console.log("change")
         event.target.setCustomValidity('')
         this.setState({[key]: event.target});
     }
