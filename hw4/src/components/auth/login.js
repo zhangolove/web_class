@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { FieldGroup } from '../forms.js'
 import {Locations, ActionTypes} from '../../enums'
 
 const login = ({redirect}) => {

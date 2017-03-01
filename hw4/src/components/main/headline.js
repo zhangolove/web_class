@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { FormControl, Button, Image } from 'react-bootstrap'
-import { FieldGroup } from '../forms.js'
 import { ActionTypes } from '../../enums'
 
 const headline = ({headline, name, pic, update}) => {

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
-import { validate_pwd, validate_dob } from '../forms.js'
+import { validate_pwd, validate_dob } from '../forms'
 import {Locations, ActionTypes} from '../../enums'
 
 
@@ -55,10 +55,7 @@ const registerForm = ({validate}) => {
                 Register
             </Button>
         </form>
-
     )
-
-
 }
 
 
