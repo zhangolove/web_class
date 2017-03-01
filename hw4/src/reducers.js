@@ -50,7 +50,7 @@ const Reducer = (state = {
         case ActionTypes.CHANGE_FILTER:
             return {...state, filter: action.filter}
         case ActionTypes.UPDATE_PROFILE:
-            return {...state, user: {...state.user, ...action.fields}}
+            return {...state, user: {...state.user, ...action.changed}}
         default:
             return state
     }

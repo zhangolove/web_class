@@ -22,21 +22,10 @@ const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
     ]
 
     const _update = (e) => {
-        const {pwd, pwd1} = refs
-        //pwd1 is only for confirmation, so don't want it to be updated
-        const changed = Object.keys(refs)
-            .filter((key) => refs[key] && refs[key].value && key !== "pwd1")
-            .reduce((obj, key) => {
-                obj[key] = refs[key].value
-                return obj
-            }, {})
-        if (validate_pwd(pwd, pwd1)) {
-            update(changed)
-        }
         e.preventDefault();
-        Object.keys(refs).forEach((k) => refs[k].value = "")
+        update(refs)
     }
-
+    
     return (
     <form onSubmit={_update}>
         {
@@ -58,8 +47,21 @@ const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
 const ProfileForm = connect(
     (state) => ({...state.user}),
     (dispatch) => ({
-        update: (fields) => 
-        dispatch({type: ActionTypes.UPDATE_PROFILE, fields})
+        update: (refs) => {
+            const {pwd, pwd1} = refs
+            //pwd1 is only for confirmation, so don't want it to be updated
+            const changed = Object.keys(refs)
+                .filter((key) => refs[key] && refs[key].value && key !== "pwd1")
+                .reduce((obj, key) => {
+                    obj[key] = refs[key].value
+                    return obj
+                }, {})
+            if (validate_pwd(pwd, pwd1)) {
+                Object.keys(refs).forEach((k) => refs[k].value = "")
+                dispatch({type: ActionTypes.UPDATE_PROFILE, changed})
+            }
+        }
+        
     })
 )(profileForm)
 
