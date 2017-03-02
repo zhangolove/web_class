@@ -13,6 +13,10 @@ const avatar = ({pic}) => (
     </div>
 )
 
+avatar.PropTypes = {
+    pic: PropTypes.string.isRequired,
+}
+
 const Avatar = connect(
     (state) => ({...state.user}),
     null

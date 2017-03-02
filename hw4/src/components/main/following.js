@@ -23,6 +23,10 @@ const AddFollowing = ({ addMember }) => {
     </span>)
 }
 
+AddFollowing.PropTypes = {
+    addMember: PropTypes.func.isRequired
+}
+
 
 
 
@@ -38,6 +42,13 @@ const following = ({followings, addMember}) => (
         <AddFollowing addMember={addMember} />
     </div>
 )
+
+following.PropTypes = {
+    followings: PropTypes.arrayOf(PropTypes.shape({
+                ...MiniProfile.propTypes
+            }).isRequired).isRequired,
+    addMember: PropTypes.func.isRequired
+}
 
 const Following = connect(
     (state) => ({followings: state.followings}),

@@ -1,7 +1,7 @@
 {
   "name": "starter",
   "version": "1.0.0",
-  "description": "COMP 431/531 starter",
+  "description": "Ricebook",
   "main": "./src/index.js",
   "scripts": {
     "clean": "rimraf dist/bundle.js*",

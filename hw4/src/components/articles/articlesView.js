@@ -28,6 +28,9 @@ const AddArticle = ({ addArticle }) => {
     </span>)
 }
 
+AddArticle.PropTypes = {
+    addArticle: PropTypes.func.isRequired
+}
 
 
 
@@ -44,6 +47,13 @@ const articleViews = ({articles, addArticle}) => (
         </ ListGroup>
     </div>
 )
+
+articleViews.PropTypes = {
+    articles: PropTypes.arrayOf(PropTypes.shape({
+        ...Article.propTypes
+    }).isRequired).isRequired,
+    addArticle: PropTypes.func.isRequired
+}
 
 const ArticleViews = connect(
     (state) => ({articles: filterArticles(state.articles, state.filter)

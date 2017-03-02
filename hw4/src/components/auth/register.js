@@ -11,7 +11,7 @@ const registerForm = ({validate}) => {
     const refs = {}
 
     const onChange = (e) => {e.target.setCustomValidity('')}
-    //to save space, instead of listing as <FormGroup>, 
+    //to save space, instead of listing the fields as <FormGroup>, 
     //I list the fields compactly as objects
     //which also makes it easier to insert ref and avoid repetition
     const fields = [
@@ -56,6 +56,10 @@ const registerForm = ({validate}) => {
             </Button>
         </form>
     )
+}
+
+registerForm.PropTypes = {
+    validate: PropTypes.func.isRequired
 }
 
 

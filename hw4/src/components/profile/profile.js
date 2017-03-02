@@ -20,6 +20,7 @@ const profile = ({profileNavBar}) => (
     </div>
 )
 
+
 const Profile = connect(
     null,
     (dispatch) => ({

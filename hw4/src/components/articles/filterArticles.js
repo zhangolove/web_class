@@ -19,6 +19,10 @@ const articleSearchBox = ({changeFilter}) => {
     )
 }
 
+articleSearchBox.PropTypes = {
+    changeFilter: PropTypes.func.isRequired
+}
+
 export const filterArticles = (articles, filter) => {
     if (!filter) {
         return articles

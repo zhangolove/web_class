@@ -29,6 +29,7 @@ const main = ({mainNavBar}) => (
 
 )
 
+
 const Main = connect(
     null,
     (dispatch) => ({

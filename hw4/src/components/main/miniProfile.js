@@ -20,10 +20,18 @@ const miniProfile = ({name, pic, headline, remove}) => (
     </li>
 )
 
+
 const MiniProfile = connect(null, (dispatch, ownProps) => ({
         remove: () => dispatch({ type: ActionTypes.REMOVE_FOLLOWING, 
                                 id: ownProps.id }),
     })
 )(miniProfile)
+
+MiniProfile.PropTypes = {
+    name: React.PropTypes.string.isRequired,
+    pic: React.PropTypes.string.isRequired,
+    headline: React.PropTypes.string.isRequired,
+    remove: React.PropTypes.func.isRequired
+}
 
 export default MiniProfile

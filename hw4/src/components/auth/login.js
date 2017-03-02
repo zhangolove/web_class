@@ -33,6 +33,10 @@ const login = ({redirect}) => {
     )
 }
 
+login.PropTypes = {
+    redirect: PropTypes.func.isRequired
+}
+
 const Login = connect(
     null,
     (dispatch) => ({

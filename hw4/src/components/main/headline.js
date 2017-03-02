@@ -36,6 +36,12 @@ const headline = ({headline, name, pic, update}) => {
     )
 }
 
+headline.PropTypes = {
+    headline: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    pic: PropTypes.string.isRequired,
+    update: PropTypes.func.isRequired
+}
 
 const Headline = connect(
     (state) => ({

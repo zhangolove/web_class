@@ -6,7 +6,7 @@ import { ActionTypes } from '../../enums'
 
 
 
-const Article = ({text, date, img, comments, author}) => (
+const Article = ({text, date, img, author}) => (
     <li className="list-group-item">
         <Media>
         <Media.Left align="top">
@@ -24,4 +24,11 @@ const Article = ({text, date, img, comments, author}) => (
         </Media>
     </li>
 )
+
+Article.PropTypes = {
+    text: React.PropTypes.string.isRequired,
+    date: React.PropTypes.instanceOf(Date).isRequired,
+    img: React.PropTypes.string.isRequired,
+    author: React.PropTypes.string.isRequired,
+}
 export default Article
