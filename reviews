@@ -1,0 +1,67 @@
+First, the appearance should be appealing to the users. If a site looks too primitive or too messy, I (as a user) will close the tab at my first sight.
+Second, the user interface should conform to the web best practice and allow the users to easily understand and access with minimal conscious thinking.
+Third, the whole front end application should have full functionality and contains no bug, otherwise I would think this company is unprofessional and worry about my personal information on this site.
+
+
+This site is very consistent in style. For example, the buttons are assigned different colors according to their semantics: "cancel" and "unfollow" buttons are red; "update" and "post" buttons are red; "comment" buttons are green. The consistent style facilitates user actions.
+
+The responsive layout part is buggy: 1) in the Following panel on the left of the page, the username and "unfollow" button overlaps with each other as you adjust the width of the window. 2) in the mobile view, the main article panel is completely hidden and the following section predominates the page. I don't think this behavior what you intend.
+
+
+
+What I like best about this site is its thematic styling. Its heavy usage of blue-ish colors conveys a consistency and specialty to the users.
+
+The article cards looks terrible to me. The top left and bottom right corners are rectangular while the other two are round. I don't feel good looking at them.
+
+My styling is very primitive and looks just like another bare bootstrap site. I should consider adding more unique elements like the blue theme in this site.
+
+
+
+The styling is simple and clean.
+
+After you post a new article containing very few text, the card layout becomes on longer aligned and looks disorganized. Also, I had a hard time looking for the logout button.
+
+Currently my site uses html5 form validation to alert users that they have invalid inputs. I find the bootstrap alertion looks more appealing as in this site.
+
+
+This is the best site I have reviewed so far and it makes me feel ashamed of the lack of creativity in my own site. The appealing cowboy theme looks very interesting and makes users like me want to use it.
+
+The responsive layout part is not working correctly: the text gets cutoff as you reduce the width of the window.
+
+My styling is very primitive and looks just like another bare bootstrap site. I should consider adding more unique elements like the cowboy theme in this site.
+
+
+
+
+
+
+The navbar and the usage of emojis as avatars look neat. The former provides a clear guide to the site while the latter makes me feel interesting because I have not yet met anyone who use emoji as avatars picture.
+
+The responsive layout part is not working correctly: a large portion of window becomes empty as you reduce the width of the window.
+
+My site looks very similar to this one except that I do not separate the articles and user avatars, which is not a good thing, because it means mine is not personal enough. I should add more unique elements in it.
+
+
+The background colors, in contrast with everything else in the site, makes the site much more appealing than a pure black and white html site.
+
+The site barely has any styling, which makes it look more like a course website rather than a social network site. Try to use a css framework such as bootstrap. It's not that much work. In addition, the buttons are not functional.
+
+My site is way better than this site since mine is functional and has at least some style.
+
+
+The best thing I like about this site is that everything is working, especially the responsive layout. Unlike the other sites I have reviewed so far, this site will actually show the the article panel rather than the following panel to the user. Mobile friendly is important.
+
+This site looks almost the same to the sample site. Should consider making it more unique.
+
+
+My site looks very similar to this one except that I do not separate the articles and user avatars, which is not a good thing, because it means mine is not personal enough. I should add more unique elements in it.
+
+
+
+
+The buttons in this site look terrible in both the styling and the absence of gaps between buttons.
+
+My site looks similar to this one but has better aesthetic.
+
+
+
