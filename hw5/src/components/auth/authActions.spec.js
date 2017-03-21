@@ -12,7 +12,6 @@ describe('Validate login', function() {
     mockery.registerMock('node-fetch', fetch)
     require('node-fetch')
     }
-    //Action = require('./actions').default
     actions = require('./authActions')
     Actions = require('../../actions')
     locations = Actions.Locations
@@ -36,16 +35,14 @@ describe('Validate login', function() {
       headers: {'Content-Type':'application/json'},
       json: {username, result: "success"}
     })
-    let called = 0
     actions.loginAction(username, password)((action) => {
-        if (called == 0) { 
-            expect(action).to.eql({type: actionTypes.LOGIN, username})
-            called += 1
-        }else{
-            expect(action).to.eql({type: actionTypes.GO_TO_PAGE, location: locations.MAIN})
-            done()
+        if (action.type === actionTypes.LOGIN ) {
+          expect(action).to.eql({type: actionTypes.LOGIN, username})
+          done()
         }
     })
+    
+
   })
 
  it('should not login an invalid user',(done)=>{

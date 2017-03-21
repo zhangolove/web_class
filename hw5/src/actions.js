@@ -42,7 +42,8 @@ export const ActionTypes = {
     UPDATE_PROFILE: 'UPDATE_PROFILE',
     ALERT: 'ALERT',
     LOGIN: 'LOGIN',
-    LOGOUT: 'LOGOUT'
+    LOGOUT: 'LOGOUT',
+    LOAD_ARTICLES: 'LOAD_ARTICLES'
 }
 
 export const goToPage = (dest) => ({type: ActionTypes.GO_TO_PAGE,  

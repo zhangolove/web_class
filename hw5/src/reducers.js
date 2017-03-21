@@ -1,10 +1,8 @@
 import { Locations, ActionTypes} from './actions'
 const initialFollowing = require('./data/followings.json').followings
-const rawArticles = require('./data/articles.json').articles
 //need to convert string to date object for later sorting
-const initialArticles = rawArticles.map((article) => ({...article, date: new Date(article.date)}))
 const initialProfile = require('./data/profile.json').user
-const initialNumArticles = initialArticles.length
+const initialNumArticles = 0
 const initialNumFollowings = initialFollowing.length
 
 const Reducer = (state = {
@@ -14,7 +12,7 @@ const Reducer = (state = {
     location: Locations.LANDING,
     user: initialProfile,
     followings: initialFollowing,
-    articles: initialArticles,
+    articles: [],
     alertType: "",
     alertContent: "",
     filter: null
@@ -28,6 +26,8 @@ const Reducer = (state = {
             return {...state, username: action.username}
         case ActionTypes.LOGOUT:
             return {...state, user: initialProfile}
+        case ActionTypes.LOAD_ARTICLES:
+            return {...state, articles: action.articles}
         case ActionTypes.UPDATE_HEADLINE:
             return { ...state, user: { ...state.user, headline: action.text} }
         case ActionTypes.REMOVE_FOLLOWING:

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { FieldGroup } from '../forms'
-import { loginAction } from './authActions'
+import { loginAndRedirect } from './authActions'
 import ReactDOM from 'react-dom'
 
 const login = ({redirect}) => {
@@ -40,7 +40,7 @@ login.PropTypes = {
 const Login = connect(
     null,
     (dispatch) => ({
-        redirect: (username, password) => loginAction(username, password)(dispatch)
+        redirect: (username, password) => loginAndRedirect(username, password)(dispatch)
     })
 )(login)
 

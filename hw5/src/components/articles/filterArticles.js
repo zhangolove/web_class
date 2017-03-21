@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import {FormControl, ListGroup, Button} from 'react-bootstrap'
 import { ActionTypes } from '../../actions'
+import {changeFilter} from './articleActions'
 
 const articleSearchBox = ({changeFilter}) => {
     let input
@@ -28,13 +29,9 @@ export const filterArticles = (articles, filter) => {
         return articles
     }
     const query = new RegExp(filter, 'i')
-    console.log(query)
     return articles.filter((a)=>query.exec(a.author) || query.exec(a.text))
 }
 
-export const ArticleSearchBox = connect(null, (dispatch) => ({
-    changeFilter: (filter) => 
-            dispatch({type: ActionTypes.CHANGE_FILTER, filter})
-})
+export const ArticleSearchBox = connect(null, (dispatch) => ({changeFilter})
 
 )(articleSearchBox)
