@@ -1,0 +1,7 @@
+{
+	"followings": [
+	    {"id": 0, "name": "Person 0", "headline": "I am not person 1", "pic": "https://unsplash.it/200/300?random"},
+	    {"id": 1, "name": "Person 1", "headline": "I am person 1", "pic": "https://unsplash.it/200/300?random"},
+	    {"id": 2, "name": "Person 2", "headline": "I am not person 0", "pic": "https://unsplash.it/200/300?random"}
+	]
+}
