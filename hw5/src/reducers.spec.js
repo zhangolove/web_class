@@ -1,83 +1,71 @@
 import { expect } from 'chai'
-import mockery from 'mockery'
-import fetch, { mock } from 'mock-fetch'
+
 
 
 describe('Validate reducers', function() {
-    let actions, actionTypes, url, Actions
+    let Reducer, Locations, ActionTypes, Action, initState, Filter
     
     beforeEach(() => {
-        if (mockery.enable) {
-            mockery.enable({warnOnUnregistered: false, useCleanCache:true})
-            mockery.registerMock('node-fetch', fetch)
-            require('node-fetch')
-        }
-        //Action = require('./actions').default
-        actions = require('./profileActions')
-        Actions = require('../../actions')
-        actionTypes = Actions.ActionTypes
-        url = Actions.url
-    })
-
-    afterEach(() => {
-        if (mockery.enable) {
-            mockery.deregisterMock('node-fetch')
-            mockery.disable()
+        Reducer = require('./reducers').default
+        Action = require('./actions')
+        Filter = require('./components/articles/filterArticles')
+                    .filterArticles
+        Locations = Action.Locations
+        ActionTypes = Action.ActionTypes
+        initState = {
+            location: Locations.LANDING,
+            user: {},
+            followings: [],
+            articles: [],
+            alertType: "",
+            alertContent: "",
+            filter: null
         }
     })
-
-
-    it('should fetch the user\'s proile information',(done)=>{
-        const userProfile = 
-            {avatars: 'test0', email: 'e1', zipcode: 'z1', dob: 'dob1'}
-        mock(`${url}/avatars`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                json: { avatars: userProfile.avatars }
-            })
-
-            mock(`${url}/email`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                json: { email: userProfile.email }
-            })
-
-            mock(`${url}/zipcode`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                json: { zipcode: userProfile.zipcode }
-            })
-
-            mock(`${url}/dob`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                json: { dob: userProfile.dob }
-            })
-
-        actions.fetchProfile()((action) => {
-            expect(action.type).to.eql(actionTypes.UPDATE_PROFILE)
-            const key = Object.keys(action.field)[0]
-            expect(action.field.key).to.eql(userProfile.key)
-        }).then(() => done())
-
+    it('should return the initial state', () => {
+        
+        expect(Reducer(undefined, {})).to.eql(initState)
     })
 
-    it('should update headline',(done)=>{
-        // the result from the mocked AJAX call
-        const username = 'sep1test'
-        const headline = 'A new headline!'
-
-        mock(`${url}/headline`, {
-            method: 'PUT',
-            headers: {'Content-Type':'application/json'},
-            json: { username, headline }
-        })
-
-        actions.updateHeadline('does not matter')(
-            fn => fn(action => {
-            expect(action.type).to.eql(actionTypes.UPDATE_PROFILE)
-            expect(action.field).to.eql({headline})
-            done()
-        }))
+    it('should state success (for displaying success message to user)', () => {
+        const alertContent = 'testSuccess'
+        const alertType = "success"
+        expect(Reducer(undefined, 
+            { type: ActionTypes.ALERT, alertType, alertContent}))
+            .to.eql({ ...initState, alertType, alertContent })
     })
+
+    it('should state success (for displaying success message to user)', () => {
+        const alertContent = 'testFailure'
+        const alertType = "danger"
+        expect(Reducer(undefined, 
+            { type: ActionTypes.ALERT, alertType, alertContent}))
+            .to.eql({ ...initState, alertType, alertContent })
+    })
+
+    it('should set the articles', () => {
+        const articles = [ { _id: 1, author: 'xxx', date: new Date(), text: 'test' } ]
+        expect(Reducer(undefined, { type: ActionTypes.LOAD_ARTICLES, articles }))
+            .to.eql({ ...initState, articles })
+    })
+
+    it('should set the search keyword', () => {
+        const filter = 'hello'
+        expect(Reducer(undefined, { type: ActionTypes.CHANGE_FILTER, filter }))
+            .to.eql({ ...initState, filter })
+    })
+
+    it('should filter displayed articles by the search keyword', () => {
+        const filter = 'cl46'
+        const articles = [
+            { _id: 1, author: 'xxx', date: '2013-3-18', text: '1' },
+            { _id: 2, author: 'cl46', date: '2013-3-18', text: '2' }
+        ]
+
+        const res = Filter(articles, filter)
+        expect(res).to.have.length(1)
+        expect(res[0]).to.eql(articles[1])
+    })
+
+
 })

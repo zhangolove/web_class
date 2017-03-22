@@ -1,6 +1,5 @@
 import { Locations, ActionTypes} from './actions'
 const Reducer = (state = {
-    //these ids are useful when removing objects
     location: Locations.LANDING,
     user: {},
     followings: [],
