@@ -1,5 +1,4 @@
 import { Locations, ActionTypes} from './actions'
-const initialFollowing = require('./data/followings.json').followings
 //need to convert string to date object for later sorting
 const initialProfile = require('./data/profile.json').user
 const Reducer = (state = {

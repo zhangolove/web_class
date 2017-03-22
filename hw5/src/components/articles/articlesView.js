@@ -40,11 +40,12 @@ export const ArticleViews = ({articles, addArticle}) => (
         <AddArticle addArticle={addArticle} />
         <ArticleSearchBox />
         <ListGroup componentClass="ul" className="articles">
-            {articles.map(({_id,text,date,img,comments,author}) => (
+            {articles.map(({_id,text,date,img,comments,author}) => {
+                return (
                 <Article key={_id} id={_id} 
                     text={text} date={date} img={img} 
                     comments={comments} author={author}/>
-            ))}
+            )})}
         </ ListGroup>
     </div>
 )

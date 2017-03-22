@@ -12,8 +12,7 @@ const loadFollowingInfo = (dispatch) => (response) => {
         }, {})
         const query = response.following.join(',')
         return Promise.all([getFollowingHeadings(query, following), 
-                            getFollowingAvatars(query, following),
-                            getFollowingArticles(following, dispatch)])
+                            getFollowingAvatars(query, following)])
             .then(() => {
                 const followingList = Object.keys(following)
                                             .map((key, idx) => ({
@@ -23,6 +22,7 @@ const loadFollowingInfo = (dispatch) => (response) => {
                         pic: following[key].avatar
                 }))
                 dispatch({ type: ActionTypes.LOAD_FOLLOWINGS, followingList })
+                return following
             })
     }
 
@@ -48,6 +48,7 @@ export const fetchFollowings = () => (dispatch) =>
 
     resource('GET', 'following/')
     .then(loadFollowingInfo(dispatch))
+    // .then((following)=>getFollowingArticles(following, dispatch))
     .catch(err => {
         console.log(err)
         dispatch(alertError('Unable to fetch following list.'))
