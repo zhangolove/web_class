@@ -1,10 +1,8 @@
 import { Locations, ActionTypes} from './actions'
-//need to convert string to date object for later sorting
-const initialProfile = require('./data/profile.json').user
 const Reducer = (state = {
     //these ids are useful when removing objects
     location: Locations.LANDING,
-    user: initialProfile,
+    user: {},
     followings: [],
     articles: [],
     alertType: "",
