@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Media, Button, Glyphicon} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { ActionTypes } from '../../actions'
+import { removeFollowing } from './followingActions'
 
 
 const miniProfile = ({name, pic, headline, remove}) => (
@@ -22,8 +23,7 @@ const miniProfile = ({name, pic, headline, remove}) => (
 
 
 const MiniProfile = connect(null, (dispatch, ownProps) => ({
-        remove: () => dispatch({ type: ActionTypes.REMOVE_FOLLOWING, 
-                                id: ownProps.id }),
+        remove: () => removeFollowing(ownProps.name)(dispatch),
     })
 )(miniProfile)
 

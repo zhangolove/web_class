@@ -1,17 +1,15 @@
 import {resource, ActionTypes} from '../../actions'
 
-export const loadArticles = (articles) => ({
+export const loadArticles = (raw) => ({
 	type: ActionTypes.LOAD_ARTICLES,
-	articles
+	articles: raw.map((article) => 
+                        ({...article, date: new Date(article.date)}))
 })
 
 export const fetchArticles = () => (dispatch) =>
 	resource('GET','articles')
 	.then((response) => {
-        const raw = response.articles
-		const articles = raw.map((article) => 
-                        ({...article, date: new Date(article.date)}))
-		dispatch(loadArticles(articles))
+		dispatch(loadArticles(response.articles))
 })
 
 export const postNewArticle = (text) => (dispatch) =>

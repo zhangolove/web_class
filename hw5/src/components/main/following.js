@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {FormControl, ListGroup, Button} from 'react-bootstrap'
 import {ActionTypes} from '../../actions'
 import MiniProfile from './miniProfile'
+import {addFollowing} from './followingActions'
 
 
 const AddFollowing = ({ addMember }) => {
@@ -53,7 +54,7 @@ following.PropTypes = {
 const Following = connect(
     (state) => ({followings: state.followings}),
     (dispatch) => ({addMember: (name)=>
-                    dispatch({type: ActionTypes.ADD_FOLLOWING, name})})
+                    addFollowing(name)(dispatch)})
 )(following)
 
 export default Following

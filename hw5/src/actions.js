@@ -43,7 +43,10 @@ export const ActionTypes = {
     ALERT: 'ALERT',
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
-    LOAD_ARTICLES: 'LOAD_ARTICLES'
+    LOAD_ARTICLES: 'LOAD_ARTICLES',
+    LOAD_FOLLOWINGS: 'LOAD_FOLLOWINGS',
+    ADD_ARTICLES: 'ADD_ARTICLES',
+    REMOVE_ARTICLES: 'REMOVE_ARTICLES'
 }
 
 export const goToPage = (dest) => ({type: ActionTypes.GO_TO_PAGE,  
