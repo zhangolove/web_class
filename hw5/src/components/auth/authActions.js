@@ -1,6 +1,7 @@
 import { resource, ActionTypes, alertError, goToMain, goToLanding } from '../../actions'
 import {fetchArticles} from '../articles/articleActions'
 import { fetchFollowings } from '../main/followingActions'
+import {fetchProfile} from '../profile/profileActions'
 
 export const loginAndRedirect = (username, password) =>
     (dispatch) => 
@@ -14,7 +15,8 @@ export const loginAndRedirect = (username, password) =>
 export const loadInfo = () => (dispatch) => {
     return Promise.all([
             fetchArticles()(dispatch),
-            fetchFollowings()(dispatch)
+            fetchFollowings()(dispatch),
+            fetchProfile()(dispatch)
         ])
 }
 
