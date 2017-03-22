@@ -1,8 +1,8 @@
-import { resource, ActionTypes, alertError, goToMain, goToLanding } from '../../actions'
+import { resource, ActionTypes, alertError, alertSuccess, goToMain, goToLanding } from '../../actions'
 import {fetchArticles} from '../articles/articleActions'
 import { fetchFollowings } from '../main/followingActions'
 import {fetchProfile, fetchHeadline} from '../profile/profileActions'
-
+import { validate_pwd, validate_dob } from '../forms'
 
 export const loginAndRedirect = (username, password) =>
     (dispatch) => 
@@ -29,6 +29,7 @@ export const loginAction = (username, password) =>
             dispatch({ type: ActionTypes.LOGIN, username: response.username })
         }).catch((err) => {
             dispatch(alertError('Invalid username or password.'))
+            throw(err)
         })
 
 
@@ -41,3 +42,18 @@ export const logoutAction = () =>
         }).catch((err) => {
             dispatch(alertError('Unauthorized logout.'))
         })
+
+export const registerAction = ({username, email, dob, zipcode, pwd1, password}) => 
+    (dispatch) => {
+        if (validate_dob(dob) && validate_pwd(pwd1, password)) {
+            const payload = {username: username.value,
+                            email: email.value,
+                            dob: dob.value,
+                            zipcode: zipcode.value,
+                            password: password.value}
+            resource('POST', 'register', payload)
+                .then((response) => {
+                dispatch(alertSuccess('Registration succeeeded. Please log in'))
+            })
+        }
+    }
