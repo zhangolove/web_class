@@ -1,7 +1,7 @@
 {
     "user": 
      {  "name": "Chongzhang", 
-        "pic": "http://cvcl.mit.edu/hybrid/MonroeEnstein_AudeOliva2007.jpg",
+        "avatars": [{"avatar":"http://cvcl.mit.edu/hybrid/MonroeEnstein_AudeOliva2007.jpg"}],
         "headline": "default headline",
         "dob": "03/28/1995",
         "email": "a@gmail.com",

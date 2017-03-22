@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
-import { validate_pwd } from '../forms'
+
 import {ActionTypes} from '../../actions'
+import {cloudUpdate} from './profileActions'
 
 
 const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
@@ -50,21 +51,7 @@ const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
 const ProfileForm = connect(
     (state) => ({...state.user}),
     (dispatch) => ({
-        update: (refs) => {
-            const {pwd, pwd1} = refs
-            //pwd1 is only for confirmation, so don't want it to be updated
-            const changed = Object.keys(refs)
-                .filter((key) => refs[key] && refs[key].value && key !== "pwd1")
-                .reduce((obj, key) => {
-                    obj[key] = refs[key].value
-                    return obj
-                }, {})
-            if (validate_pwd(pwd, pwd1)) {
-                Object.keys(refs).forEach((k) => refs[k].value = "")
-                dispatch({type: ActionTypes.UPDATE_PROFILE, changed})
-            }
-        }
-        
+        update: cloudUpdate(dispatch)
     })
 )(profileForm)
 
