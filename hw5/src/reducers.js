@@ -18,7 +18,7 @@ const Reducer = (state = {
             return {...state, alertType: 
                 action.alertType, alertContent: action.alertContent}
         case ActionTypes.LOGIN:
-            return {...state, username: action.username}
+            return {...state, user: {...state.user, username: action.username}}
         case ActionTypes.LOGOUT:
             return {...state, user: initialProfile}
         case ActionTypes.LOAD_ARTICLES:

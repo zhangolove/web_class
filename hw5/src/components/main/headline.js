@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { FormControl, Button, Image } from 'react-bootstrap'
 import {ActionTypes} from '../../actions'
-const headline = ({headline, name, pic, update}) => {
+import {updateHeadline} from '../profile/profileActions'
+const headline = ({headline, username, avatars, update}) => {
 
     let input 
 
@@ -17,8 +18,8 @@ const headline = ({headline, name, pic, update}) => {
 
     return (
         <div>
-            <h3> {name} </h3>
-            <Image src={pic} rounded responsive/>
+            <h3> {username} </h3>
+            <Image src={!avatars ? '' : avatars[0].avatar} rounded responsive/>
             <h4> {headline} </h4>
             <form onSubmit={handleSubmit}>
                 <FormControl
@@ -47,9 +48,7 @@ const Headline = connect(
         ...state.user
     }), 
     (dispatch) => ({
-        update: (text) => dispatch(
-            {type: ActionTypes.UPDATE_HEADLINE,text})
-    })
+        update: (text) => updateHeadline(text)(fn => fn(dispatch))})
 )(headline)
 
 export default Headline

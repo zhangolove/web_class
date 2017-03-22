@@ -13,7 +13,13 @@ function UpdateProfileAvatars() {
 
 const fetchGeneric = (field) => (dispatch) => dispatch(fetchField(field))
 
-const updateHeadline = (headline) => 
+export const fetchHeadline = (user) => (dispatch) =>
+  resource('GET', `headlines/${user}`)
+    .then((response) => dispatch({type: ActionTypes.UPDATE_PROFILE, 
+                field:{headline: response.headlines[0].headline}}))
+    .catch(err => console.log(err))
+
+export const updateHeadline = (headline) => 
         (dispatch) => dispatch(updateField('headline', headline))
 const updateEmail = (email) => 
       (dispatch) => dispatch(updateField('email', email))
@@ -42,7 +48,7 @@ const localUpdateField = (field, dispatch) => (response) => {
 }
 
 
-export const fetchProfile = (username) => {
+export const fetchProfile = () => {
     const fields = ['dob', 'email', 'zipcode','avatars']
     return (dispatch) => 
 		 Promise.all(
