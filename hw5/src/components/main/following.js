@@ -7,12 +7,12 @@ import MiniProfile from './miniProfile'
 import {addFollowing} from './followingActions'
 
 
-const AddFollowing = ({ addMember }) => {
+const AddFollowing = ({ followings, username, addMember }) => {
     let newMember;
 
     const _addMember = () => {
         if (newMember && newMember.value) {
-            addMember(newMember.value)
+            addMember(newMember.value, username, followings)
             newMember.value = ''
         }
     }
@@ -31,7 +31,7 @@ AddFollowing.PropTypes = {
 
 
 
-const following = ({followings, addMember}) => (
+const following = ({followings, username, addMember}) => (
     <div>
         <h4>My Followings</h4>
         <ListGroup componentClass="ul">
@@ -40,7 +40,8 @@ const following = ({followings, addMember}) => (
                     name={name} headline={headline} pic={pic}/>
             ))}
         </ ListGroup>
-        <AddFollowing addMember={addMember} />
+        <AddFollowing addMember={addMember} followings={followings}
+                    username={username}/>
     </div>
 )
 
@@ -52,9 +53,9 @@ following.PropTypes = {
 }
 
 const Following = connect(
-    (state) => ({followings: state.followings}),
-    (dispatch) => ({addMember: (name)=>
-                    addFollowing(name)(dispatch)})
+    (state) => ({followings: state.followings, username: state.user.username}),
+    (dispatch) => ({addMember: (name, myname, followings)=>
+                    addFollowing(name, myname, followings)(dispatch)})
 )(following)
 
 export default Following

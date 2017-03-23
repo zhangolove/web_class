@@ -74,10 +74,19 @@ const _removeFollowing = (dispatch, name) => () =>
             dispatch(alertError('Errors occurs when removing following.'))
         })
 
+const validateNewFollowing = (newName, myname, followings) => {
+    //you cannot add yourself or existing followings
+    if (newName === myname) return false
+    return followings.filter(({name}) => name === newName).length === 0
+}
 
-export const addFollowing = (name) => (dispatch) =>  
-    checkExistence(dispatch, _addFollowing(dispatch, name), name)
-        
+export const addFollowing = (name, myname, followings) => (dispatch) =>  {
+    if (validateNewFollowing(name, myname, followings)) {
+        checkExistence(dispatch, _addFollowing(dispatch, name), name)
+    } else {
+        dispatch(alertError('Cannot add repeated following or yourself'))
+    }
+}
 
 export const removeFollowing = (name) => (dispatch) =>  
     checkExistence(dispatch, _removeFollowing(dispatch, name), name)
