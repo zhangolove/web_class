@@ -8,6 +8,7 @@ export const loginAndRedirect = (username, password) =>
     (dispatch) => 
         loginAction(username, password)(dispatch)
             .then(() => loadInfo(username)(dispatch))
+            .then(() => dispatch({type: ActionTypes.DISMISS_ALERT}))
             .then(() => dispatch(goToMain()))
             .catch((err) => {
                 console.log(err)

@@ -1,1 +1,5 @@
  .hidden { display:none; }
+
+ .alert_info {
+  margin-bottom:0;
+}

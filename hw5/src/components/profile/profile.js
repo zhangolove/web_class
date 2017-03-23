@@ -6,9 +6,10 @@ import Avatar from './avatar'
 import ProfileForm from './profileForm'
 import { Grid, Col, Row } from 'react-bootstrap'
 import { logoutAction } from '../auth/authActions'
-
+import Message from '../message'
 const profile = ({profileNavBar}) => (
      <div>
+        <Message />
         <NavbarInstance {...profileNavBar} />
         <Grid className="show-grid">
             <Row>

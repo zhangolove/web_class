@@ -7,10 +7,12 @@ import Headline from './headline'
 import Following from './following'
 import ArticleViews from '../articles/articlesView'
 import { logoutAction } from '../auth/authActions'
+import Message from '../message'
 
 // 
 const main = ({mainNavBar}) => (
     <div>
+        <Message />
         <NavbarInstance {...mainNavBar} />
         <Grid className="show-grid">
             <Row>

@@ -8,6 +8,7 @@ import { Grid, Col, Row, PageHeader } from 'react-bootstrap'
 
 const Landing = () => (
     <div>
+        <Message />
         <NavbarInstance brand={{text: "Welcome Back!"}} links={[]}/>
         <Grid>
             <Row>
@@ -16,10 +17,6 @@ const Landing = () => (
             <Row>
                 <Col sm={10} smOffset={1} md={6} mdOffset={3}><Register /></Col>
             </Row>
-            <Row>
-                <Col sm={10} smOffset={1} md={6} mdOffset={3}><Message /></Col>
-            </Row>
-
         </Grid>
     </div>
 )

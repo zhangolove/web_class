@@ -10,10 +10,13 @@ const Reducer = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.GO_TO_PAGE:
-            return { ...state, location: action.location }
+            return { ...state, location: action.location,
+                    alertType:"", alertContent:"" }
         case ActionTypes.ALERT:
             return {...state, alertType: 
                 action.alertType, alertContent: action.alertContent}
+        case ActionTypes.DISMISS_ALERT:
+            return {...state, alertType:"", alertContent:""}
         case ActionTypes.LOGIN:
             return {...state, user: {...state.user, username: action.username}}
         case ActionTypes.LOGOUT:

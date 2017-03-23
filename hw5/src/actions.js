@@ -46,7 +46,8 @@ export const ActionTypes = {
     LOAD_ARTICLES: 'LOAD_ARTICLES',
     LOAD_FOLLOWINGS: 'LOAD_FOLLOWINGS',
     ADD_ARTICLES: 'ADD_ARTICLES',
-    REMOVE_ARTICLES: 'REMOVE_ARTICLES'
+    REMOVE_ARTICLES: 'REMOVE_ARTICLES',
+    DISMISS_ALERT: 'DISMISS_ALERT'
 }
 
 export const goToPage = (dest) => ({type: ActionTypes.GO_TO_PAGE,  
