@@ -68,11 +68,9 @@ export const cloudUpdate = (dispatch) => (refs) => {
                     return obj
                 }, {})
             if ('zipcode' in changed) {
-                console.log(zipcode.value)
                 updateZipcode(zipcode.value)(fn => fn(dispatch))
             }
             if ('email' in changed) {
-                console.log(email.value)
                 updateEmail(email.value)(fn => fn(dispatch))
             }
             if (validate_pwd(pwd, pwd1)) {
@@ -80,7 +78,7 @@ export const cloudUpdate = (dispatch) => (refs) => {
                     updatePassword(pwd1.value)(fn => fn(dispatch))
                 }
                 Object.keys(refs).forEach((k) => refs[k].value = "")
-                if (changed.length > 0){
+                if (Object.keys(changed).length > 0){
                   dispatch({type: ActionTypes.UPDATE_PROFILE, field: changed})
                 }
             }
