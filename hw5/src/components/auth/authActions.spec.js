@@ -11,7 +11,8 @@ describe('Validate login', function() {
     mockery.enable({warnOnUnregistered: false, useCleanCache:true})
     mockery.registerMock('node-fetch', fetch)
     require('node-fetch')
-    }
+  }
+    global.fetch = fetch
     actions = require('./authActions')
     Actions = require('../../actions')
     locations = Actions.Locations

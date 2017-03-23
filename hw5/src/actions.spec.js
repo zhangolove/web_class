@@ -11,7 +11,8 @@ describe('Validate actions', function() {
     mockery.enable({warnOnUnregistered: false, useCleanCache:true})
     mockery.registerMock('node-fetch', fetch)
     require('node-fetch')
-    }
+  }
+    global.fetch = fetch
     //Action = require('./actions').default
     actions = require('./actions')
     url = actions.url

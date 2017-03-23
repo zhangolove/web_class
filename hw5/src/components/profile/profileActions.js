@@ -1,5 +1,6 @@
-import { ActionTypes, resource } from '../../actions'
+import { ActionTypes, resource, alertError} from '../../actions'
 import { validate_pwd } from '../forms'
+
 
 function UpdateProfileAvatars() {
 	return (dispatch) => {
@@ -18,7 +19,7 @@ export const fetchHeadline = (user) => (dispatch) =>
   resource('GET', `headlines/${user}`)
     .then((response) => dispatch({type: ActionTypes.UPDATE_PROFILE, 
                 field:{headline: response.headlines[0].headline}}))
-    .catch(err => console.log(err))
+    .catch(err => dispatch(alertError(err)))
 
 export const updateHeadline = (headline) => 
         (dispatch) => dispatch(updateField('headline', headline))

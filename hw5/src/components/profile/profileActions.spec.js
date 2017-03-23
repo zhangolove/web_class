@@ -12,7 +12,7 @@ describe('Validate profile actions', function() {
             mockery.registerMock('node-fetch', fetch)
             require('node-fetch')
         }
-        //Action = require('./actions').default
+        global.fetch = fetch
         actions = require('./profileActions')
         Actions = require('../../actions')
         actionTypes = Actions.ActionTypes
@@ -59,6 +59,7 @@ describe('Validate profile actions', function() {
             const key = Object.keys(action.field)[0]
             expect(action.field.key).to.eql(userProfile.key)
         }).then(() => done())
+        .catch(() => done())
 
     })
 

@@ -12,8 +12,7 @@ import Reducer from './reducers'
 import App from './components/App'
 
 
-const logger = createLogger()
-const store = createStore(Reducer, applyMiddleware(logger))
+const store = createStore(Reducer)
 
 render(
     <Provider store={store}>

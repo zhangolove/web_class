@@ -11,7 +11,8 @@ describe('Validate article actions', function() {
     mockery.enable({warnOnUnregistered: false, useCleanCache:true})
     mockery.registerMock('node-fetch', fetch)
     require('node-fetch')
-    }
+  }
+    global.fetch = fetch
     actions = require('./articleActions')
     Actions = require('../../actions')
     actionTypes = Actions.ActionTypes

@@ -38,11 +38,9 @@ const fetchArticle = (dispatch, author) =>
 const checkExistence = (dispatch, callback, name) => 
     resource('GET', `following/${name}`)
 			.then(callback)
-            .catch((err) => {
+            .catch((err) => 
 			    dispatch(alertError(
-                    `Add following error: ${name} that does not exist`))
-                console.log(err)
-})
+                    `Add following error: ${name} that does not exist`)))
 
 
 export const fetchFollowings = () => (dispatch) => 
@@ -66,10 +64,9 @@ const _removeFollowing = (dispatch, name) => () =>
     resource('DELETE', `following/${name}`)
         .then(loadFollowingInfo(dispatch))
         .then(() => dispatch({type:ActionTypes.REMOVE_ARTICLES, author: name}))
-        .catch(err => {
-            console.log(err)
+        .catch(err => 
             dispatch(alertError('Errors occurs when removing following.'))
-        })
+        )
 
 const validateNewFollowing = (newName, myname, followings) => {
     //you cannot add yourself or existing followings
@@ -101,7 +98,6 @@ const getFollowingAvatars = (query, following) =>
     resource('GET', `avatars/${query}`)
         .then((response) => {
 			response.avatars.forEach((item) => {
-                console.log(`foreach ${item.username}`)
                 following[item.username].avatar = item.avatar
             })
             return following

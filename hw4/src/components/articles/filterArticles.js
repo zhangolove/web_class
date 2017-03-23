@@ -28,7 +28,6 @@ export const filterArticles = (articles, filter) => {
         return articles
     }
     const query = new RegExp(filter, 'i')
-    console.log(query)
     return articles.filter((a)=>query.exec(a.author) || query.exec(a.text))
 }
 

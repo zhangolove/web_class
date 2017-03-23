@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 56.0.2924 (Mac OS X 10.12.3)" package="" timestamp="2017-03-23T02:10:16" id="0" hostname="chrismpb.local" tests="3" errors="0" failures="0" time="0.006">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"/>
+  </properties>
+  <testcase name="Validate login should log the user in" time="0.004" classname="Chrome_56_0_2924_(Mac_OS_X_10_12_3).Validate login"/>
+  <testcase name="Validate login should log the user out" time="0.001" classname="Chrome_56_0_2924_(Mac_OS_X_10_12_3).Validate login"/>
+  <testcase name="Validate login should update the headline" time="0.001" classname="Chrome_56_0_2924_(Mac_OS_X_10_12_3).Validate login"/>
+  <system-out>
+    <![CDATA[Chrome 56.0.2924 (Mac OS X 10.12.3) LOG: 'New headline bar'
+,Chrome 56.0.2924 (Mac OS X 10.12.3) LOG: 'box [object HTMLDivElement]'
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
