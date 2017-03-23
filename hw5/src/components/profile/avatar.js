@@ -9,7 +9,8 @@ import {FieldGroup} from '../forms'
 const avatar = ({avatars}) => (
     <div>
         <Image src={!avatars ? '' : avatars[0].avatar} rounded responsive/>
-        <FieldGroup id="fieldGroupAvartar" label="Upload new profile avatar" type="file" />
+        <FieldGroup id="fieldGroupAvartar" 
+                label="Upload new profile avatar" type="file" />
     </div>
 )
 

@@ -7,12 +7,11 @@ import { validate_pwd, validate_dob } from '../forms'
 export const loginAndRedirect = (username, password) =>
     (dispatch) => 
         loginAction(username, password)(dispatch)
+        //prefetch info to avoid fetching info for every page
+        //redirection
             .then(() => loadInfo(username)(dispatch))
-            .then(() => dispatch({type: ActionTypes.DISMISS_ALERT}))
             .then(() => dispatch(goToMain()))
-            .catch((err) => {
-                console.log(err)
-            })
+            .catch((err) => {})
 
 export const loadInfo = (username) => (dispatch) => {
     return Promise.all([
@@ -44,7 +43,8 @@ export const logoutAction = () =>
             dispatch(alertError('Unauthorized logout.'))
         })
 
-export const registerAction = ({username, email, dob, zipcode, pwd1, password}) => 
+export const registerAction = ({username, email, 
+                        dob, zipcode, pwd1, password}) => 
     (dispatch) => {
         if (validate_dob(dob) && validate_pwd(pwd1, password)) {
             const payload = {username: username.value,
@@ -53,8 +53,8 @@ export const registerAction = ({username, email, dob, zipcode, pwd1, password}) 
                             zipcode: zipcode.value,
                             password: password.value}
             resource('POST', 'register', payload)
-                .then((response) => {
-                dispatch(alertSuccess('Registration succeeeded. Please log in'))
+              .then((response) => {
+              dispatch(alertSuccess('Registration succeeeded. Please log in'))
             })
         }
     }

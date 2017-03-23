@@ -5,7 +5,8 @@ function UpdateProfileAvatars() {
 	return (dispatch) => {
 		return resource('GET', 'avatars')
 			.then((response) => {
-				dispatch({ type: Action.UPDATE_PROFILE, avatar: response.avatars[0].avatar });
+				dispatch({ type: Action.UPDATE_PROFILE,
+                    avatar: response.avatars[0].avatar });
 			})
 	}
 }

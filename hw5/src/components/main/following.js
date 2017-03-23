@@ -19,7 +19,8 @@ const AddFollowing = ({ followings, username, addMember }) => {
 
     return (<span>
         <FormControl name="inputAddFollowing" type="text" 
-            placeholder="Add Following" ref={(node) => newMember = ReactDOM.findDOMNode(node)} />
+            placeholder="Add Following" 
+            ref={(node) => newMember = ReactDOM.findDOMNode(node)} />
         <Button name="btnAddFollowing" onClick={_addMember}>Add</Button>
     </span>)
 }

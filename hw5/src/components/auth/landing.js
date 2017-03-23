@@ -15,7 +15,7 @@ const Landing = () => (
                 <Col sm={10} smOffset={1} md={6} mdOffset={3}><Login /></Col>
             </Row>
             <Row>
-                <Col sm={10} smOffset={1} md={6} mdOffset={3}><Register /></Col>
+                <Col sm={10} smOffset={1} md={6} mdOffset={3}><Register/></Col>
             </Row>
         </Grid>
     </div>

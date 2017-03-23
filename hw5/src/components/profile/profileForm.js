@@ -16,11 +16,15 @@ const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
     //which also makes it easier to insert ref and avoid repetition
     const props = [
         {id: "name", type: "text", label: "Display Name", placeholder: name},
-        {id: "email", type: "email", label: "Email address", placeholder: email,
+        {id: "email", type: "email", label: "Email address", 
+            placeholder: email,
             pattern:"^[A-Za-z0-9]+@[A-Za-z0-9.]+\\.[a-zA-Z]+$"},
-        {id: "dob", type: "text",label:"Date of Birth",placeholder: new Date(dob), readOnly: true},
-        {id: "phone", type: "tel", label: "Phone", placeholder: phone, pattern: "^\\d{10}$"},
-        {id: "zipcode", type: "text", label: "Zipcode", placeholder: zipcode, pattern: "^\\d{5}$"},
+        {id: "dob", type: "text",label:"Date of Birth",
+                    placeholder: new Date(dob), readOnly: true},
+        {id: "phone", type: "tel", label: "Phone", 
+                    placeholder: phone, pattern: "^\\d{10}$"},
+        {id: "zipcode", type: "text", label: "Zipcode", 
+                        placeholder: zipcode, pattern: "^\\d{5}$"},
         {id: "pwd", type: "password", label: "Password"},
         {id: "pwd1", type: "password", label: "Confirm Password", onChange}
     ]

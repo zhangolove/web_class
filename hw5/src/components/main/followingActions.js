@@ -2,6 +2,7 @@ import { resource, ActionTypes, alertError } from '../../actions'
 
 
 const loadFollowingInfo = (dispatch) => (response) => {
+        //if you have no followings, do not need to do anything
         if (response.following.length === 0) {
             dispatch({ type: ActionTypes.LOAD_FOLLOWINGS, followingList:[] })
             return
@@ -38,32 +39,28 @@ const checkExistence = (dispatch, callback, name) =>
     resource('GET', `following/${name}`)
 			.then(callback)
             .catch((err) => {
-			    dispatch(alertError(`Add following error: ${name} that does not exist`))
+			    dispatch(alertError(
+                    `Add following error: ${name} that does not exist`))
                 console.log(err)
 })
 
 
 export const fetchFollowings = () => (dispatch) => 
 {   
-
     resource('GET', 'following/')
     .then(loadFollowingInfo(dispatch))
-    // .then((following)=>getFollowingArticles(following, dispatch))
     .catch(err => {
-        console.log(err)
         dispatch(alertError('Unable to fetch following list.'))
     })
 }
 
 const _addFollowing = (dispatch, name) => () =>
     fetchArticle(dispatch, name)
-        .then(() => resource('PUT', `following/${name}`).then(loadFollowingInfo(dispatch)))
+        .then(() => resource('PUT', `following/${name}`)
+                .then(loadFollowingInfo(dispatch)))
         .catch(err => {
-            console.log(err)
             dispatch(alertError('Errors occurs when adding following.'))
         })
-
-
 
 const _removeFollowing = (dispatch, name) => () =>
     resource('DELETE', `following/${name}`)
@@ -91,9 +88,6 @@ export const addFollowing = (name, myname, followings) => (dispatch) =>  {
 export const removeFollowing = (name) => (dispatch) =>  
     checkExistence(dispatch, _removeFollowing(dispatch, name), name)
         
-
-
-
 const getFollowingHeadings = (query, following) => 
     resource('GET', `headlines/${query}`)
         .then((response) => {

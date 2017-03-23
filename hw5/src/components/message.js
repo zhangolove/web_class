@@ -9,7 +9,8 @@ export const Message = ({msgType, msgContent, dismiss}) => (
     <div>
         {
             msgType === "" ? "" :
-            <Alert bsStyle={msgType} onDismiss={dismiss} className="alert_info">
+            <Alert bsStyle={msgType} onDismiss={dismiss}
+                     className="alert_info">
                 {msgContent}
             </Alert>
         }

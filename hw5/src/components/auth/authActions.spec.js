@@ -55,7 +55,8 @@ describe('Validate login', function() {
       statusText: 'Unauthorized'
     })
     actions.loginAction(username, password)((action) => {
-        expect(action).to.eql(Actions.alertError('Invalid username or password.'))
+        expect(action).to
+            .eql(Actions.alertError('Invalid username or password.'))
     }).catch(err => { done() })
   })
 
@@ -71,7 +72,8 @@ describe('Validate login', function() {
             expect(action).to.eql({type: actionTypes.LOGOUT})
             called += 1
         }else{
-            expect(action).to.eql({type: actionTypes.GO_TO_PAGE, location: locations.LANDING})
+            expect(action).to
+              .eql({type: actionTypes.GO_TO_PAGE, location: locations.LANDING})
             done()
         }
     })

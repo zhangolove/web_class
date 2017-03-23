@@ -77,14 +77,16 @@ describe('Validate actions', function() {
 
   it('should update error message',(done)=>{
     const alertContent = 'should update error message'
-    expect(actions.alertError(alertContent)).to.eql({ type: actions.ActionTypes.ALERT, 
+    expect(actions.alertError(alertContent))
+          .to.eql({ type: actions.ActionTypes.ALERT, 
                   alertType: "danger", alertContent })
     done()
   })
 
   it('should update success message',(done)=>{
     const alertContent = 'should update success message'
-    expect(actions.alertSuccess(alertContent)).to.eql({ type: actions.ActionTypes.ALERT, 
+    expect(actions.alertSuccess(alertContent))
+              .to.eql({ type: actions.ActionTypes.ALERT, 
                   alertType: "success", alertContent })
     done()
   })

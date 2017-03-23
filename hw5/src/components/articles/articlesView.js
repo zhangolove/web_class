@@ -25,7 +25,8 @@ export const AddArticle = ({ addArticle }) => {
             placeholder="Say something...please" 
             ref={(node) => newArticle = ReactDOM.findDOMNode(node)} />
         <Button name="btnAddArticle" onClick={_addArticle}>Post</Button>
-        <FieldGroup id="fieldGroupPostImg" label="Attach a picture" type="file" />
+        <FieldGroup id="fieldGroupPostImg" 
+                label="Attach a picture" type="file" />
     </span>)
 }
 

@@ -40,7 +40,8 @@ login.PropTypes = {
 const Login = connect(
     null,
     (dispatch) => ({
-        redirect: (username, password) => loginAndRedirect(username, password)(dispatch)
+        redirect: (username, password) => 
+                    loginAndRedirect(username, password)(dispatch)
     })
 )(login)
 

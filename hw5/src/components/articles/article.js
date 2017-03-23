@@ -31,7 +31,8 @@ const Article = ({text, date, img, author, comments}) => {
             <Button>Add a Comment</Button>
         </ButtonGroup>
     
-        <div className='hidden' ref={(node)=>{commentArea=ReactDOM.findDOMNode(node)}}>
+        <div className='hidden' 
+            ref={(node)=>{commentArea=ReactDOM.findDOMNode(node)}}>
             {comments.map((comment) => 
             <Comment key={comment.commentId} 
                      author={comment.author}
