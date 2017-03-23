@@ -15,7 +15,7 @@ module.exports = {
     devtool: 'source-map',
     stats: { colors: true },
     node: { fs: 'empty'},
-    plugins: ignore,
+    plugins:ignore,
     module: {
         loaders: [{
             test: /.jsx?$/,
