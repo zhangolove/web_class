@@ -1,16 +1,18 @@
 import React from 'react'
-import {Media} from 'react-bootstrap'
+import {Media, Button} from 'react-bootstrap'
+import EditableContent from './editableContent'
 
+const Comment = ({author, date, text, toggleEditComment, update, isEditing, ifOwned}) => {
 
-const Comment = ({author, date, text}) => 
-	(
-	<Media>
+	return (<Media>
         <Media.Body className="comment">
             <Media.Heading>{`${author} commented on ${date}`}</Media.Heading> 
-             <p>{text}</p> 
+             <EditableContent text={text} update={update} editable={isEditing} />
+             { ifOwned ? <Button onClick={toggleEditComment}>Edit Comment</Button> :
+                        <Button disabled>Edit Comment</Button>}
         </Media.Body>
-	</Media>
-	)
-
+	</Media>)
+	
+}
 
 export default Comment

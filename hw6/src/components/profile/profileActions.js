@@ -2,15 +2,6 @@ import { ActionTypes, resource, alertError} from '../../actions'
 import { validate_pwd } from '../forms'
 
 
-function UpdateProfileAvatars() {
-	return (dispatch) => {
-		return resource('GET', 'avatars')
-			.then((response) => {
-				dispatch({ type: Action.UPDATE_PROFILE,
-                    avatar: response.avatars[0].avatar });
-			})
-	}
-}
 
 
 const fetchGeneric = (field) => (dispatch) => dispatch(fetchField(field))
@@ -86,3 +77,13 @@ export const cloudUpdate = (dispatch) => (refs) => {
             }
         }
 
+
+
+export const uploadAvatar = (img) => (dispatch) => {
+    const fd = new FormData()
+    fd.append('image', img)
+    return resource('PUT', 'avatar', fd, true)
+            .then((response) => 
+                fetchGeneric('avatars')(fn => fn(dispatch))
+            )
+}

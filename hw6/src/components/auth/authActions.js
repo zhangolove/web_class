@@ -54,7 +54,7 @@ export const registerAction = ({username, email,
                             password: password.value}
             resource('POST', 'register', payload)
               .then((response) => {
-              dispatch(alertSuccess('Registration succeeeded. Please log in'))
+              dispatch(alertSuccess('Registration succeeded. Please log in'))
             })
         }
     }

@@ -42,7 +42,8 @@ const Main = connect(
                 
                 {
                     text: "Logout",
-                    action: () => logoutAction()(dispatch)
+                    action: () => logoutAction()(dispatch),
+                    id: "logout"
                 }
             ]
         }

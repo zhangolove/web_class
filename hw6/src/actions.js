@@ -2,21 +2,23 @@ import "isomorphic-fetch"
 
 export const url = 'https://webdev-dummy.herokuapp.com'
 
-export const resource = (method, endpoint, payload) => {
+export const resource = (method, endpoint, payload, ifRaw=false) => {
   const options =  {
     method,
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    credentials: 'include'
   }
-  if (payload) options.body = JSON.stringify(payload)
+  if (!ifRaw) {
+    options.headers = {'Content-Type': 'application/json'}
+  }
+  if (!ifRaw && payload) payload = JSON.stringify(payload)
+  if (payload) options.body = payload
 
   return fetch(`${url}/${endpoint}`, options)
     .then(r => {
       if (r.status === 200) {
         return (r.headers.get('Content-Type').indexOf('json') > 0) ? r.json() : r.text()
       } else {
+        console.log(r.statusText)
         throw new Error(r.statusText)
       }
     })
@@ -33,9 +35,6 @@ export const Locations = {
 export const ActionTypes = {
     GO_TO_PAGE: 'GO_TO_PAGE',
     UPDATE_HEADLINE: 'UPDATE_HEADLINE',
-    REMOVE_FOLLOWING: 'REMOVE_FOLLOWING',
-    ADD_FOLLOWING: 'ADD_FOLLOWING',
-    ADD_ARTICLE: 'ADD_ARTICLE',
     CHANGE_FILTER: 'CHANGE_FILTER',
     UPDATE_PROFILE: 'UPDATE_PROFILE',
     ALERT: 'ALERT',
@@ -45,7 +44,10 @@ export const ActionTypes = {
     LOAD_FOLLOWINGS: 'LOAD_FOLLOWINGS',
     ADD_ARTICLES: 'ADD_ARTICLES',
     REMOVE_ARTICLES: 'REMOVE_ARTICLES',
-    DISMISS_ALERT: 'DISMISS_ALERT'
+    DISMISS_ALERT: 'DISMISS_ALERT',
+    EDIT_ARTICLE: 'EDIT_ARTICLE',
+    EDIT_COMMENT: 'EDIT_COMMENT',
+    ADD_COMMENT: 'ADD_COMMENT'
 }
 
 export const goToPage = (dest) => ({type: ActionTypes.GO_TO_PAGE,  

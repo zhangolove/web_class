@@ -45,11 +45,12 @@ const registerForm = ({validate}) => {
                     <ControlLabel>{label}</ControlLabel>
                     <FormControl {...props} 
                         ref={(node)=>{refs[id]=ReactDOM.findDOMNode(node)}}
+                        id={'r' + id}
                         required/>
                 </FormGroup>
             )})
             }
-            <Button type="submit">
+            <Button type="submit" id="register"> 
                 Register
             </Button>
         </form>

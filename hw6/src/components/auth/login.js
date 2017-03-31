@@ -19,14 +19,16 @@ const login = ({redirect}) => {
         <FormGroup id="formControlsUsername">
             <ControlLabel>Username</ControlLabel>
             <FormControl type="text" placeholder="Enter username" 
-                ref={(node)=>{username=ReactDOM.findDOMNode(node)}} required/>
+                ref={(node)=>{username=ReactDOM.findDOMNode(node)}} 
+                id="username" required/>
         </FormGroup>
         <FormGroup id="formControlsPassword">
             <ControlLabel>Password</ControlLabel>
             <FormControl type="password" placeholder="Enter username" 
-                ref={(node)=>{password=ReactDOM.findDOMNode(node)}} required/>
+                ref={(node)=>{password=ReactDOM.findDOMNode(node)}} 
+                id="password" required/>
         </FormGroup>
-        <Button type="submit">
+        <Button id="login" type="submit">
             Login
         </Button>
     </form>

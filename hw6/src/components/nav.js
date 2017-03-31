@@ -14,7 +14,7 @@ export const NavbarInstance = ({brand, links}) => (
     <Navbar.Collapse>
       <Nav pullRight>
         {links.map((l, idx) => (
-            <NavItem key={idx} onClick={l.action}>{l.text}</NavItem>
+            <NavItem key={idx} onClick={l.action} id={l.id}>{l.text}</NavItem>
         ))}
       </Nav>
     </Navbar.Collapse>
