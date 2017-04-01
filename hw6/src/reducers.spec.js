@@ -45,7 +45,8 @@ describe('Validate reducers', function() {
 
     it('should set the articles', () => {
         const articles = [ { _id: 1, 
-                author: 'xxx', date: new Date(), text: 'test' } ]
+                author: 'xxx', date: new Date(), 
+                text: 'test', comments:[], ifOwned:false} ]
         expect(Reducer(undefined, 
                 { type: ActionTypes.LOAD_ARTICLES, articles }))
             .to.eql({ ...initState, articles })
