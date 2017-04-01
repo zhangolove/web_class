@@ -1,9 +1,5 @@
 import { Locations, ActionTypes} from './actions'
 
-
-
-
-
 const addOwnership = (articles, self) => 
     articles.map(a => ({...a, 
         ifOwned: a.author === self,
@@ -69,6 +65,12 @@ const Reducer = (state = {
                         state.articles.map(a => {
                 return a._id === action.id ?
                     {...a, isAddingCmt:!a.isAddingCmt} : a 
+            })}
+        case ActionTypes.SHOW_COMMENT:
+            return {...state, articles: 
+                        state.articles.map(a => {
+                return a._id === action.id ?
+                    {...a, ifShowComments:!a.ifShowComments} : a 
             })}
         default:
             return state

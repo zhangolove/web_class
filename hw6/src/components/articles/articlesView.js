@@ -5,8 +5,7 @@ import {FormControl, ListGroup, Button, FormGroup, ControlLabel} from 'react-boo
 import Article from './article'
 import {filterArticles, ArticleSearchBox} from './filterArticles'
 import {FieldGroup} from '../forms'
-import { postNewArticle, toggleArticleEditing, toggleEditComment,
-    updateArticleContent, updateComment, toggleAddComment} from './articleActions'
+import { postNewArticle} from './articleActions'
 
 
 
@@ -51,25 +50,19 @@ AddArticle.PropTypes = {
 
 
 
-export const ArticleViews = ({articles, addArticle, 
-            toggleArticleEditing, updateArticleContent, 
-            toggleAddComment, updateComment, isAddingCmt,
-            toggleEditComment}) => (
+export const ArticleViews = ({articles, addArticle}) => (
     <div>
         <AddArticle addArticle={addArticle} />
         <ArticleSearchBox />
         <ListGroup componentClass="ul" className="articles">
-            {articles.map(({_id,text,date,img,comments,author, isEditing, isAddingCmt, ifOwned}) => {
+            {articles.map(({_id,text,date,img,comments, ifShowComments,
+                author, isEditing, isAddingCmt, ifOwned}) => {
                 return (
                 <Article key={_id} id={_id} 
                     text={text} date={date} img={img} 
                     comments={comments} author={author} 
                     isEditing={isEditing} isAddingCmt={isAddingCmt}
-                    toggleArticleEditing={toggleArticleEditing}
-                    ifOwned={ifOwned} updateComment={updateComment(_id)}
-                    updateArticleContent={updateArticleContent(_id)}
-                    toggleAddComment={toggleAddComment}
-                    toggleEditComment={toggleEditComment(_id)}/>
+                    ifOwned={ifOwned} ifShowComments={ifShowComments}/>
             )})}
         </ ListGroup>
     </div>
@@ -86,10 +79,5 @@ export default connect(
     (state) => ({articles: filterArticles(state.articles, state.filter)
                     .sort((a, b) =>  b.date - a.date)}),
     (dispatch) => ({addArticle: (text, img)=>
-                    postNewArticle(text, img)(dispatch),
-                toggleArticleEditing: (id, author) => toggleArticleEditing(id, author, dispatch),
-            updateArticleContent: (id) => updateArticleContent(id,dispatch),
-            updateComment: (id) => updateComment(id, dispatch),
-            toggleAddComment: (id) => toggleAddComment(id, dispatch),
-            toggleEditComment: (id) => toggleEditComment(id, dispatch)})
+                    postNewArticle(text, img)(dispatch)})
 )(ArticleViews)

@@ -28,26 +28,29 @@ export const postNewArticle = (text, img) => (dispatch) => {
     return _postNewArticle(fd, dispatch)
 }
 
-export const toggleArticleEditing = (id, author, dispatch) => 
-    dispatch({type: ActionTypes.EDIT_ARTICLE, id, author})
+export const toggleArticleEditing = (id, dispatch) => 
+    dispatch({type: ActionTypes.EDIT_ARTICLE, id})
 
 export const toggleAddComment = (id, dispatch) =>
     dispatch({type: ActionTypes.ADD_COMMENT, id})
 
-export const toggleEditComment = (id, dispatch) => (commentId) => () =>
+export const toggleEditComment = (dispatch) => (id, commentId) => () =>
     dispatch({type: ActionTypes.EDIT_COMMENT, id, commentId})
+
+export const toggleShowComment = (id, dispatch) => 
+    dispatch({type: ActionTypes.SHOW_COMMENT, id})
 
 export const changeFilter = (filter) => ({
     type: ActionTypes.CHANGE_FILTER, filter
 })
 
-export const updateArticleContent = (id, dispatch) => (text) => 
+export const updateArticleContent = (dispatch) => (id) => (text) => 
     resource('PUT', `articles/${id}`, {text})
     .then((response) => {
         fetchArticles()(dispatch)
     })
 
-export const updateComment = (id, dispatch) => (commentId) => (text) => 
+export const updateComment = (dispatch) => (id, commentId) => (text) => 
     resource('PUT', `articles/${id}`, {text, commentId})
     .then((response) => {
         fetchArticles()(dispatch)

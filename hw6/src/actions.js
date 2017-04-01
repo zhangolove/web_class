@@ -47,7 +47,8 @@ export const ActionTypes = {
     DISMISS_ALERT: 'DISMISS_ALERT',
     EDIT_ARTICLE: 'EDIT_ARTICLE',
     EDIT_COMMENT: 'EDIT_COMMENT',
-    ADD_COMMENT: 'ADD_COMMENT'
+    ADD_COMMENT: 'ADD_COMMENT',
+    SHOW_COMMENT: 'SHOW_COMMENT'
 }
 
 export const goToPage = (dest) => ({type: ActionTypes.GO_TO_PAGE,  
