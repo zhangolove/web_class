@@ -14,11 +14,11 @@ export const resource = (method, endpoint, payload, ifRaw=false) => {
   if (payload) options.body = payload
 
   return fetch(`${url}/${endpoint}`, options)
-    .then(r => {
+    .then((r) => {
       if (r.status === 200) {
-        return (r.headers.get('Content-Type').indexOf('json') > 0) ? r.json() : r.text()
+        return (r.headers.get('Content-Type')
+                  .indexOf('json') > 0) ? r.json() : r.text()
       } else {
-        console.log(r.statusText)
         throw new Error(r.statusText)
       }
     })

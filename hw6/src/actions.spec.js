@@ -96,10 +96,13 @@ describe('Validate actions', function() {
     const {MAIN, LANDING, PROFILE}  = actions.Locations
     expect(actions.goToMain()).to.eql({ type: actions.ActionTypes.GO_TO_PAGE, 
                   location: MAIN})
-    expect(actions.goToLanding()).to.eql({ type: actions.ActionTypes.GO_TO_PAGE, 
+    expect(actions.goToLanding()).to.eql(
+                { type: actions.ActionTypes.GO_TO_PAGE,
                   location: LANDING})
-    expect(actions.goToProfile()).to.eql({ type: actions.ActionTypes.GO_TO_PAGE, 
-                  location: PROFILE})
+    expect(actions.goToProfile()).to.eql(
+            { type: actions.ActionTypes.GO_TO_PAGE, 
+              location: PROFILE 
+            })
     done()
   })
 

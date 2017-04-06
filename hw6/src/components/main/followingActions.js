@@ -47,7 +47,7 @@ export const fetchFollowings = () => (dispatch) =>
 {   
     resource('GET', 'following/')
     .then(loadFollowingInfo(dispatch))
-    .catch(err => {
+    .catch((err) => {
         dispatch(alertError('Unable to fetch following list.'))
     })
 }
@@ -56,7 +56,7 @@ const _addFollowing = (dispatch, name) => () =>
     fetchArticle(dispatch, name)
         .then(() => resource('PUT', `following/${name}`)
                 .then(loadFollowingInfo(dispatch)))
-        .catch(err => {
+        .catch((err) => {
             dispatch(alertError('Errors occurs when adding following.'))
         })
 
@@ -64,7 +64,7 @@ const _removeFollowing = (dispatch, name) => () =>
     resource('DELETE', `following/${name}`)
         .then(loadFollowingInfo(dispatch))
         .then(() => dispatch({type:ActionTypes.REMOVE_ARTICLES, author: name}))
-        .catch(err => 
+        .catch((err) => 
             dispatch(alertError('Errors occurs when removing following.'))
         )
 

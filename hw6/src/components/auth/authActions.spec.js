@@ -58,7 +58,7 @@ describe('Validate login', function() {
     actions.loginAction(username, password)((action) => {
         expect(action).to
             .eql(Actions.alertError('Invalid username or password.'))
-    }).catch(err => { done() })
+    }).catch((err) => { done() })
   })
 
   it('should log out a user (state should be cleared)',(done)=>{

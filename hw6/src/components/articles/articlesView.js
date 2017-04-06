@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import {FormControl, ListGroup, Button, FormGroup, ControlLabel} from 'react-bootstrap'
+import {FormControl, ListGroup, Button, 
+            FormGroup, ControlLabel} from 'react-bootstrap'
 import Article from './article'
 import {filterArticles, ArticleSearchBox} from './filterArticles'
 import {FieldGroup} from '../forms'

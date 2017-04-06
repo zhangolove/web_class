@@ -4,8 +4,9 @@ import {Media, Button, ButtonGroup} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import Comment from './comment'
 import EditableContent from './editableContent'
-import {toggleAddComment, toggleArticleEditing, toggleEditComment,
-    updateArticleContent, updateComment, toggleShowComment} from './articleActions'
+import {toggleAddComment, toggleArticleEditing, 
+    toggleEditComment, updateArticleContent, 
+    updateComment, toggleShowComment} from './articleActions'
 
 
 
@@ -38,7 +39,8 @@ export const Article = ({id, text, date, img, author, toggleShowComment,
         </Media.Body>
         <ButtonGroup className="articleBtns">
             { ifOwned ? 
-            <Button className="btnToggleEdit" onClick={toggleArticleEditing(id)}>
+            <Button className="btnToggleEdit" 
+                    onClick={toggleArticleEditing(id)}>
                 Edit Post
             </Button> :
             <Button disabled>Edit Post</Button>}
@@ -81,10 +83,11 @@ Article.PropTypes = {
 
 
 export default connect(
-    _=>_,
+    (_)=>_,
     (dispatch) => ({
             toggleAddComment: (id) => () => toggleAddComment(id, dispatch),
-            toggleArticleEditing: (id) => () => toggleArticleEditing(id, dispatch),
+            toggleArticleEditing: (id) => () => 
+                                toggleArticleEditing(id, dispatch),
             updateArticleContent: updateArticleContent(dispatch),
             updateComment: updateComment(dispatch),
             toggleShowComment: (id) => () => toggleShowComment(id, dispatch)

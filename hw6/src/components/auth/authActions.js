@@ -1,4 +1,5 @@
-import { resource, ActionTypes, alertError, alertSuccess, goToMain, goToLanding } from '../../actions'
+import { resource, ActionTypes, alertError, 
+        alertSuccess, goToMain, goToLanding } from '../../actions'
 import {fetchArticles} from '../articles/articleActions'
 import { fetchFollowings } from '../main/followingActions'
 import {fetchProfile, fetchHeadline} from '../profile/profileActions'

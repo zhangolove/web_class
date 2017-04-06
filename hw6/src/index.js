@@ -12,9 +12,9 @@ import Reducer from './reducers'
 import App from './components/App'
 
 
-//const store = createStore(Reducer)
-const logger = createLogger()
-const store = createStore(Reducer, applyMiddleware(logger))
+const store = createStore(Reducer)
+// const logger = createLogger()
+// const store = createStore(Reducer, applyMiddleware(logger))
 
 
 render(

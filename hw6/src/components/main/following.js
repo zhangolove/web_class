@@ -18,10 +18,14 @@ const AddFollowing = ({ followings, username, addMember }) => {
     }
 
     return (<span>
-        <FormControl id="inputAddFollowing" name="inputAddFollowing" type="text" 
+        <FormControl id="inputAddFollowing" 
+            name="inputAddFollowing" type="text" 
             placeholder="Add Following" 
             ref={(node) => newMember = ReactDOM.findDOMNode(node)} />
-        <Button id="btnAddFollowing" name="btnAddFollowing" onClick={_addMember}>Add</Button>
+        <Button id="btnAddFollowing" name="btnAddFollowing" 
+                onClick={_addMember}>
+                Add
+        </Button>
     </span>)
 }
 

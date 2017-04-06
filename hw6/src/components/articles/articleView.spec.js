@@ -8,7 +8,7 @@ import { shallow } from 'enzyme'
 
 const findByClassname = (children, classname) => {
     const result = Array.prototype
-            .filter.call(children, it => it.className.indexOf(classname) >= 0)
+            .filter.call(children, (it) => it.className.indexOf(classname) >= 0)
     return result.length ? result[0] : null
 }
 
@@ -44,10 +44,10 @@ describe(' validates ArticlesView ', () => {
         const singleArticle = TestUtils.renderIntoDocument(<div>
             <Article text={a.text} date={a.date} 
                     img={a.img} author={a.author} comments={a.comments}
-                    toggleArticleEditing={_=>_}
-                    toggleAddComment={_=>_} isAddingCmt={false}
-                    updateArticleContent={_=>_} updateComment={_=>_}
-                    toggleShowComment={_=>_}/>
+                    toggleArticleEditing={(_)=>_}
+                    toggleAddComment={(_)=>_} isAddingCmt={false}
+                    updateArticleContent={(_)=>_} updateComment={(_)=>_}
+                    toggleShowComment={(_)=>_}/>
         </div>)
         const articleInDoc = findDOMNode(singleArticle).children[0]
         expect(articleInDoc.children).to.have.length(1)
@@ -63,7 +63,7 @@ describe(' validates ArticlesView ', () => {
     it('should dispatch actions to create a new article', () => {
         let clicked = true
         const node = TestUtils.renderIntoDocument(
-            <div><AddArticle addArticle={_ => clicked = true} /></div>)
+            <div><AddArticle addArticle={(_) => clicked = true} /></div>)
         const children = findDOMNode(node).children[0].children
         TestUtils.Simulate.click(children[1])
         expect(clicked).to.be.true

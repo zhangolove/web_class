@@ -49,7 +49,7 @@ const Headline = connect(
         ...state.user
     }), 
     (dispatch) => ({
-        update: (text) => updateHeadline(text)(fn => fn(dispatch))})
+        update: (text) => updateHeadline(text)((fn) => fn(dispatch))})
 )(headline)
 
 export default Headline

@@ -23,7 +23,7 @@ export const Comment = ({id, commentId, author, date, text,
 }
 
 export default connect(
-    _=>_,
+    (_)=>_,
     (dispatch) => ({
             updateComment: updateComment(dispatch),
             toggleEditComment: toggleEditComment(dispatch)

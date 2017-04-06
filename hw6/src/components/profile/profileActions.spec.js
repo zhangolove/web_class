@@ -75,7 +75,7 @@ describe('Validate profile actions', function() {
         })
 
         actions.updateHeadline('does not matter')(
-            fn => fn(action => {
+            (fn) => fn((action) => {
             expect(action.type).to.eql(actionTypes.UPDATE_PROFILE)
             expect(action.field).to.eql({headline})
             done()

@@ -10,7 +10,7 @@ export const fetchHeadline = (user) => (dispatch) =>
   resource('GET', `headlines/${user}`)
     .then((response) => dispatch({type: ActionTypes.UPDATE_PROFILE, 
                 field:{headline: response.headlines[0].headline}}))
-    .catch(err => dispatch(alertError(err)))
+    .catch((err) => dispatch(alertError(err)))
 
 export const updateHeadline = (headline) => 
         (dispatch) => dispatch(updateField('headline', headline))
@@ -49,7 +49,7 @@ export const fetchProfile = () => {
     const fields = ['dob', 'email', 'zipcode','avatars']
     return (dispatch) => 
 		 Promise.all(
-             fields.map(field => fetchGeneric(field)(fn => fn(dispatch)))
+             fields.map((field) => fetchGeneric(field)((fn) => fn(dispatch)))
              )
 }
 	 
@@ -65,14 +65,14 @@ export const cloudUpdate = (dispatch) => (refs) => {
                     return obj
                 }, {})
             if ('zipcode' in changed) {
-                updateZipcode(zipcode.value)(fn => fn(dispatch))
+                updateZipcode(zipcode.value)((fn) => fn(dispatch))
             }
             if ('email' in changed) {
-                updateEmail(email.value)(fn => fn(dispatch))
+                updateEmail(email.value)((fn) => fn(dispatch))
             }
             if (validate_pwd(pwd, pwd1)) {
                 if (pwd1.value != '') {
-                    updatePassword(pwd1.value)(fn => fn(dispatch))
+                    updatePassword(pwd1.value)((fn) => fn(dispatch))
                 }
                 Object.keys(refs).forEach((k) => refs[k].value = "")
                 if (Object.keys(changed).length > 0){
@@ -88,6 +88,6 @@ export const uploadAvatar = (img) => (dispatch) => {
     fd.append('image', img)
     return resource('PUT', 'avatar', fd, true)
             .then((response) => 
-                fetchGeneric('avatars')(fn => fn(dispatch))
+                fetchGeneric('avatars')((fn) => fn(dispatch))
             )
 }

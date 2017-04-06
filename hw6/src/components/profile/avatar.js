@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { Image, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { Image, Button, FormGroup, 
+        ControlLabel, FormControl } from 'react-bootstrap'
 import { uploadAvatar } from './profileActions'
 
 
