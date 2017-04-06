@@ -18,15 +18,16 @@ describe('Test Authentication', () => {
 
     it('should log in as the test user', (done) => {
         go().then(common.login)
-            .then(()=>sleep(500))
+            .then(sleep(500))
             .then(common.logout)
             .then(done)
+            .catch(done)
     })
 
     it('should register and alert the user', (done) => {
         const msg = 'Registration succeeded. Please log in'
         const alertId = 'alertMsg'
-        go().then(findId('rusername').sendKeys('abcdefg'))
+        findId('rusername').sendKeys('abcdefg')
             .then(findId('rdname').sendKeys('abcdefg123'))
             .then(findId('remail').sendKeys('a@b.com'))
             .then(findId('rdob').sendKeys('12/05/1995'))
@@ -38,8 +39,8 @@ describe('Test Authentication', () => {
             .then(()=>sleep(500))
             .then(findId(alertId).getText()
                     .then(text=>expect(text).to.contains(msg)))
-            .then(sleep(2000))
             .then(done)
+            .catch(done)
     })
 
 })

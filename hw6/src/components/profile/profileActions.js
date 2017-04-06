@@ -19,7 +19,11 @@ const updateEmail = (email) =>
 const updateZipcode = (zipcode) => 
     (dispatch) => dispatch(updateField('zipcode', zipcode))
 const updatePassword = (password) => 
-    (dispatch) => dispatch(updateField('password', password))
+    (dispatch) => {
+        dispatch(updateField('password', password))
+        dispatch((d) =>
+            d(alertError("Your password would not change")))
+    }
 
 const updateField = (field, value) => (dispatch) => {
   const payload = {}

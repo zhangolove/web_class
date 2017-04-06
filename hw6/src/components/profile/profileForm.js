@@ -40,12 +40,12 @@ const profileForm = ({name, dob, email, phone, zipcode, pwd, update}) => {
             props.map(({label,id, ...props}, idx) => (
                 <FormGroup key={idx}>
                     <ControlLabel>{label}</ControlLabel>
-                    <FormControl {...props} 
+                    <FormControl id={`input${id}`} {...props} 
                         ref={(node)=>{refs[id]=ReactDOM.findDOMNode(node)}}/>
                 </FormGroup>
             ))
         }
-        <Button type="submit">
+        <Button id="btnUpdateProfile" type="submit">
             Update Profile
         </Button>
     </form>

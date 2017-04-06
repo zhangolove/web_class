@@ -13,9 +13,11 @@ const miniProfile = ({name, pic, headline, remove}) => (
             <img width={64} height={64} src={pic} alt="Image"/>
         </Media.Left>
         <Media.Body>
-            <Media.Heading>{name}</Media.Heading> 
+            <Media.Heading className="hFollowing">{name}</Media.Heading> 
             <p> {headline} </p>
-            <Button><Glyphicon glyph="remove" onClick={remove}/></Button>
+            <Button className="btnRemoveFollowing" onClick={remove}>
+                <Glyphicon glyph="remove" />
+            </Button>
         </Media.Body>
         </Media>
     </li>

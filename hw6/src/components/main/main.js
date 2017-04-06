@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { NavbarInstance, toLink} from '../nav'
 import { Grid, Col, Row } from 'react-bootstrap'
-import { Locations} from '../../actions'
+import { Locations, goToProfile} from '../../actions'
 import Headline from './headline'
 import Following from './following'
 import ArticleViews from '../articles/articlesView'
@@ -38,8 +38,11 @@ const Main = connect(
         mainNavBar: {
             brand: toLink("Main View", Locations.MAIN, dispatch),
             links: [
-                toLink("Profile", Locations.PROFILE, dispatch),
-                
+                {
+                    text: "Profile",
+                    action: () => dispatch(goToProfile()),
+                    id: "btnRedirect2Profile"
+                },
                 {
                     text: "Logout",
                     action: () => logoutAction()(dispatch),

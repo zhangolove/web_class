@@ -18,7 +18,7 @@
     "e2e": "npm run e2e:base -- --reporter spec",
     "e2e:base": "mocha --opts e2e/mocha.opts e2e/*.spec.js",
     "e2e:watch": "npm run e2e:base -- --reporter spec -w",
-    "e2e:xunit": "npm run e2e:base -- --reporter xunit > e2e/results.xml"
+    "e2e:xunit": "mocha --opts e2e/mocha.opts e2e/*.spec.js --reporter xunit > e2e/results.xml"
   },
   "author": "Scott Pollack",
   "engines": {

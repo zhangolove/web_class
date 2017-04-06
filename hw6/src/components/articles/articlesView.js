@@ -30,10 +30,10 @@ export const AddArticle = ({ addArticle }) => {
     }
 
     return (<span>
-        <FormControl name="inputAddArticle" componentClass="textarea" 
-            placeholder="Say something...please" 
+        <FormControl className="inputAddArticle" name="inputAddArticle"
+             componentClass="textarea" placeholder="Say something...please" 
             ref={(node) => newArticle = ReactDOM.findDOMNode(node)} />
-        <Button name="btnAddArticle" onClick={_addArticle}>Post</Button>
+        <Button id="btnAddArticle" onClick={_addArticle}>Post</Button>
         <Button name="btnClearArticle" onClick={_clearArticle}>Clear</Button>
         <FormGroup>
         <ControlLabel>Attach a picture</ControlLabel>

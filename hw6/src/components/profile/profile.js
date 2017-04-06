@@ -16,8 +16,6 @@ const profile = ({profileNavBar}) => (
                 <Col sm={3}  md={3}><Avatar /></Col>
                 <Col sm={9}  md={9} ><ProfileForm /></Col>
             </Row>
-            
-        
         </Grid>
     </div>
 )
@@ -31,6 +29,7 @@ const Profile = connect(
             links: [
                 toLink("Main View", Locations.MAIN, dispatch),
                 {
+                    id: "logout",
                     text: "Logout",
                     action: () => logoutAction()(dispatch)
                 }

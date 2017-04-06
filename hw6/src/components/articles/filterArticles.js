@@ -10,11 +10,11 @@ const articleSearchBox = ({changeFilter}) => {
     return (
         <div>
             <FormControl
+                id="inputSearchArticle"
                 type="text"
                 ref={(node)=>{input = ReactDOM.findDOMNode(node)}}
                 placeholder="search author or text"
-                onChange={() => 
-                    {input && input.value && changeFilter(input.value)}}
+                onChange={() => {changeFilter(input.value)}}
             />
         </div>
     )
@@ -32,6 +32,8 @@ export const filterArticles = (articles, filter) => {
     return articles.filter((a)=>query.exec(a.author) || query.exec(a.text))
 }
 
-export const ArticleSearchBox = connect(null, (dispatch) => ({changeFilter})
+export const ArticleSearchBox = 
+    connect(null, (dispatch) => 
+        ({changeFilter: (val) => dispatch(changeFilter(val))})
 
 )(articleSearchBox)

@@ -29,13 +29,18 @@ export const Article = ({id, text, date, img, author, toggleShowComment,
             <img width={64} height={64} src={img} alt="No Image"/>
         </Media.Left>
         <Media.Body className="articleMain">
-            <Media.Heading>{`${author} said on ${date}`}</Media.Heading> 
-            <EditableContent text={text} editable={isEditing} 
+            <Media.Heading className="articleAuthor">
+                {`${author} said on ${date}`}
+            </Media.Heading> 
+            <EditableContent className="t_articleContent"
+                         text={text} editable={isEditing} 
                         update={updateArticleContent(id)}/>
         </Media.Body>
         <ButtonGroup className="articleBtns">
             { ifOwned ? 
-            <Button onClick={toggleArticleEditing(id)}>Edit Post</Button> :
+            <Button className="btnToggleEdit" onClick={toggleArticleEditing(id)}>
+                Edit Post
+            </Button> :
             <Button disabled>Edit Post</Button>}
             <Button ref={(node)=>{commentBtn=ReactDOM.findDOMNode(node)}}
                 onClick={toggleShowComment(id)}>
