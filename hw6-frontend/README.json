@@ -1,0 +1,5 @@
+{ 
+    "netid": "cl46",
+    "frontend": "http://cl46.surge.sh",
+    "backend": "https://shrouded-shelf-70247.herokuapp.com/"
+}
