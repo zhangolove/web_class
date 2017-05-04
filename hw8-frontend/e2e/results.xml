@@ -1,0 +1,19 @@
+<testsuite name="Mocha Tests" tests="17" failures="0" errors="0" skipped="0" timestamp="Thu, 06 Apr 2017 04:01:21 GMT" time="30.019">
+<testcase classname="Test Authentication" name="should log in as the test user" time="6.608"/>
+<testcase classname="Test Authentication" name="should register and alert the user" time="1.267"/>
+<testcase classname="Test Main Page functionalities" name="should log in" time="3.131"/>
+<testcase classname="Test Main Page functionalities" name="should post new article and appear in feed" time="1.804"/>
+<testcase classname="Test Main Page functionalities" name="should Edit an article and validate the                 article text has updated" time="1.974"/>
+<testcase classname="Test Main Page functionalities" name="should Update the status headline" time="1.853"/>
+<testcase classname="Test Main Page functionalities" name="should add a user to the list of followed users" time="1.231"/>
+<testcase classname="Test Main Page functionalities" name="should remove a user to the list of followed users" time="1.108"/>
+<testcase classname="Test Main Page functionalities" name="should search for &quot;Only One Article Like This&quot;           and show only one article " time="0.346"/>
+<testcase classname="Test Main Page functionalities" name="should log out" time="1.584"/>
+<testcase classname="Test Main Page functionalities" name="should log in" time="3.124"/>
+<testcase classname="Test Main Page functionalities" name="should navigate to the profile page" time="0.606"/>
+<testcase classname="Test Main Page functionalities" name="should update email" time="1.227"/>
+<testcase classname="Test Main Page functionalities" name="should update zipcode" time="1.17"/>
+<testcase classname="Test Main Page functionalities" name="should update password and diplay message" time="1.245"/>
+<testcase classname="Test Main Page functionalities" name="should log out" time="1.57"/>
+<testcase classname="shutdown" name="now" time="0.106"/>
+</testsuite>
